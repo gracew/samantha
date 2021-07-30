@@ -1,7 +1,56 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
+import { Add } from 'grommet-icons';
+import moment from 'moment';
+import Head from 'next/head';
+import Image from 'next/image';
+import React from 'react';
+import styles from '../styles/Home.module.css';
 
+const data = [
+  {
+    id: 1,
+    name: "David",
+    dates: [
+      {
+        date: "2021-07-21",
+        location: "Restaurant",
+        timeOfDay: "Dinner",
+      },
+      {
+        date: "2021-07-16",
+        location: "Park",
+        timeOfDay: "Afternoon",
+      },
+      {
+        date: "2021-07-14",
+        location: "Cafe",
+        timeOfDay: "Afternoon",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Tom",
+    dates: [
+      {
+        date: "2021-07-18",
+        location: "Bar",
+        timeOfDay: "Afternoon",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Rohan",
+    dates: [
+      {
+        date: "2021-07-10",
+        location: "Cafe",
+        timeOfDay: "Lunch",
+      },
+    ],
+  },
+];
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -12,58 +61,26 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <h2>
+          My Dates
+        </h2>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          {data.map(d => <Card key={d.id} background="light-1">
+            <CardHeader pad="medium">
+              {d.name}
+            </CardHeader>
+            <CardBody pad="medium">
+              <div>{d.dates.length} {d.dates.length === 1 ? "date" : "dates"}</div>
+              <div>{moment(d.dates[0].date).format("MMMM DD")}</div>
+            </CardBody>
+            <CardFooter background="light-2">
+              <Button hoverIndicator icon={<Add />} />
+            </CardFooter>
+          </Card>)}
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
