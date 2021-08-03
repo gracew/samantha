@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
-import { Add } from 'grommet-icons';
+import { Add, Link } from 'grommet-icons';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
@@ -24,15 +24,19 @@ export default function Home() {
         </h2>
 
         <div className={styles.grid}>
-          {data.map(d => <Card key={d.id} background="light-1">
-            <CardHeader pad="medium">
-              {d.name}
-            </CardHeader>
-            <CardBody pad="medium">
-              <div>{d.dates.length} {d.dates.length === 1 ? "date" : "dates"}</div>
-              <div>{moment(d.dates[0].date).format("MMMM DD")}</div>
-            </CardBody>
-          </Card>)}
+          {data.map(d =>
+            <Card key={d.id} background="light-1">
+              <Button hoverIndicator onClick={() => router.push(`/person/${d.id}`)}>
+                <CardHeader pad="medium">
+                  {d.name}
+                </CardHeader>
+                <CardBody pad="medium">
+                  <div>{d.dates.length} {d.dates.length === 1 ? "date" : "dates"}</div>
+                  <div>{moment(d.dates[0].date).format("MMMM DD")}</div>
+                </CardBody>
+              </Button>
+            </Card>
+          )}
 
           <Card background="light-1">
             <CardHeader pad="medium">

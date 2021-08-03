@@ -5,7 +5,7 @@ import { Step } from '../../../../components/step';
 import { addDate, getPerson } from '../../../../store';
 import styles from '../../../../styles/Home.module.css';
 
-export default function NewDateWhen() {
+export default function NewDate() {
   const [date, setDate] = useState((new Date()).toISOString());
   const [time, setTime] = useState("");
   const router = useRouter();

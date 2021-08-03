@@ -71,7 +71,7 @@ const questions = [
     question: (name: string) => `Thanks for taking the time to reflect on your date with ${name}! Is there anything else you want to make a note of?`,
   }
 ]
-export default function NewDateWhere() {
+export default function DateReflection() {
   const [step, setStep] = useState(0);
   const [value, setValue] = useState("");
   const router = useRouter();

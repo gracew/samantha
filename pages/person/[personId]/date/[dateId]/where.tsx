@@ -5,7 +5,7 @@ import { Step } from '../../../../../components/step';
 import { updateDate } from '../../../../../store';
 import styles from '../../../../../styles/Home.module.css';
 
-export default function NewDateWhere() {
+export default function DateLocation() {
   const [where, setWhere] = useState("");
   const [other, setOther] = useState("");
   const router = useRouter();
