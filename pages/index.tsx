@@ -1,6 +1,7 @@
 import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
 import { Add } from 'grommet-icons';
 import moment from 'moment';
+import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
@@ -52,6 +53,7 @@ const data = [
   },
 ];
 export default function Home() {
+  const router = useRouter();
   return (
     <div className={styles.container}>
       <Head>
@@ -74,10 +76,16 @@ export default function Home() {
               <div>{d.dates.length} {d.dates.length === 1 ? "date" : "dates"}</div>
               <div>{moment(d.dates[0].date).format("MMMM DD")}</div>
             </CardBody>
-            <CardFooter background="light-2">
-              <Button hoverIndicator icon={<Add />} />
-            </CardFooter>
           </Card>)}
+
+          <Card background="light-1">
+            <CardHeader pad="medium">
+              Someone new
+            </CardHeader>
+            <CardFooter background="light-2">
+              <Button hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
+            </CardFooter>
+          </Card>
         </div>
       </main>
 
