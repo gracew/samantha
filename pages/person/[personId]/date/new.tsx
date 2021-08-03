@@ -19,7 +19,7 @@ export default function NewDateWhen() {
 
   function onNext() {
     const dateId = addDate(personId as string, { date, time });
-    router.push(`/person/${personId}/date/${dateId}`);
+    router.push(`/person/${personId}/date/${dateId}/where`);
   }
 
   return (

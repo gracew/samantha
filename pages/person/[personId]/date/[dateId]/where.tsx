@@ -1,9 +1,9 @@
 import { DateInput, RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
-import { Step } from '../../../../components/step';
-import { updateDate } from '../../../../store';
-import styles from '../../../../styles/Home.module.css';
+import { Step } from '../../../../../components/step';
+import { updateDate } from '../../../../../store';
+import styles from '../../../../../styles/Home.module.css';
 
 export default function NewDateWhere() {
   const [where, setWhere] = useState("");
@@ -13,7 +13,7 @@ export default function NewDateWhere() {
 
   function onNext() {
     updateDate(personId as string, dateId as string, { where, other });
-    router.push(`/`);
+    router.push(`/person/${personId}/date/${dateId}/reflect`);
   }
 
   return (

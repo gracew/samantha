@@ -1,9 +1,9 @@
-import { RadioButtonGroup } from 'grommet';
+import { RadioButtonGroup, TextArea } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
-import { Step } from '../../../../components/step';
-import { getPerson } from '../../../../store';
-import styles from '../../../../styles/Home.module.css';
+import { Step } from '../../../../../components/step';
+import { getPerson } from '../../../../../store';
+import styles from '../../../../../styles/Home.module.css';
 
 const questions = [
   {
@@ -66,12 +66,16 @@ const questions = [
       "Not sure",
     ],
   },
+  {
+    id: "notes",
+    question: (name: string) => `Thanks for taking the time to reflect on your date with ${name}! Is there anything else you want to make a note of?`,
+  }
 ]
 export default function NewDateWhere() {
   const [step, setStep] = useState(0);
   const [value, setValue] = useState("");
   const router = useRouter();
-  const { personId } = router.query;
+  const { personId, dateId } = router.query;
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -82,7 +86,7 @@ export default function NewDateWhere() {
   function onNext() {
     // TODO(gracew): save to DB
     if (step === questions.length - 1) {
-      router.push(`/person/${personId}/date/4`);
+      router.push(`/`);
     } else {
       setStep(step + 1);
       setValue("");
@@ -96,12 +100,13 @@ export default function NewDateWhere() {
           <h2>
             {questions[step].question(name as string)}
           </h2>
-          <RadioButtonGroup
+          {questions[step].options && <RadioButtonGroup
             name="date-question"
-            options={questions[step].options}
+            options={questions[step].options!}
             value={value}
             onChange={e => setValue(e.target.value)}
-          />
+          />}
+          {!questions[step].options && <TextArea />}
         </Step>
       </main>
 
