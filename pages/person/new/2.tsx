@@ -2,6 +2,7 @@ import { defaultProps, RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../components/step';
+import { addPerson } from '../../../store';
 import styles from '../../../styles/Home.module.css';
 
 export default function NewPersonContext() {
@@ -10,8 +11,9 @@ export default function NewPersonContext() {
   const { name } = router.query;
 
   function onNext() {
-    // TODO(gracew): save to DB
-    router.push("/");
+    // TODO(gracew): swap out w/ backend call
+    const id = addPerson({ name: name as string, context })
+    router.push(`/person/${id}/date/new`);
   }
   return (
     <div className={styles.container}>

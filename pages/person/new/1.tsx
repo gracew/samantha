@@ -9,7 +9,6 @@ export default function NewPersonName() {
   const router = useRouter();
 
   function onNext() {
-    // TODO(gracew): save to DB
     router.push({ pathname: "/person/new/2", query: { name } });
   }
 
@@ -21,9 +20,7 @@ export default function NewPersonName() {
             Who did you meet?
           </h2>
 
-          <div className={styles.grid}>
-            <TextInput placeholder="Their name" value={name} onChange={e => setName(e.target.value)} />
-          </div>
+          <TextInput placeholder="Their name" value={name} onChange={e => setName(e.target.value)} />
         </Step>
       </main>
 

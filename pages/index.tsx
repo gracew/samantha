@@ -5,53 +5,9 @@ import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
+import { data } from '../store';
 import styles from '../styles/Home.module.css';
 
-const data = [
-  {
-    id: 1,
-    name: "David",
-    dates: [
-      {
-        date: "2021-07-21",
-        location: "Restaurant",
-        timeOfDay: "Dinner",
-      },
-      {
-        date: "2021-07-16",
-        location: "Park",
-        timeOfDay: "Afternoon",
-      },
-      {
-        date: "2021-07-14",
-        location: "Cafe",
-        timeOfDay: "Afternoon",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Tom",
-    dates: [
-      {
-        date: "2021-07-18",
-        location: "Bar",
-        timeOfDay: "Afternoon",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Rohan",
-    dates: [
-      {
-        date: "2021-07-10",
-        location: "Cafe",
-        timeOfDay: "Lunch",
-      },
-    ],
-  },
-];
 export default function Home() {
   const router = useRouter();
   return (
