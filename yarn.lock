@@ -151,6 +151,18 @@
     "@babel/helper-validator-identifier" "^7.14.8"
     to-fast-properties "^2.0.0"
 
+"@clerk/clerk-react@^1.16.1":
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@clerk/clerk-react/-/clerk-react-1.16.1.tgz#2ac2d965b1bb66586343d75804b7cd07d09ddb3e"
+  integrity sha512-48qWqJemF0AcLOQSD/+P0XsFceqNZ5b8dzPkbhdgpW/sDpEVAsCdpTJhgxRm5T2QlChychReo+8iQgiOEICyBg==
+  dependencies:
+    "@clerk/types" "1.8.1"
+
+"@clerk/types@1.8.1":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@clerk/types/-/types-1.8.1.tgz#f0a7918d9ccbafd4ba856a95b9558293c3ef4a19"
+  integrity sha512-A6a3sSoCqmtjgGQRBS3EPY3fXXwZGxWR7svdHlu1HgRhZzD7WtPIkyALP6byTPd/77V+b6FMbLl0UrAPVRs5oA==
+
 "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
