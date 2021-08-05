@@ -1,11 +1,11 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, DateInput, RadioButtonGroup, TextInput } from 'grommet';
-import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
-import { Step } from '../../components/step';
-import { addDate, getPerson } from '../../store';
-import styles from '../../styles/Home.module.css';
+import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
 import { Add } from 'grommet-icons';
 import moment from 'moment';
+import { useRouter } from 'next/dist/client/router';
+import React, { useEffect, useState } from 'react';
+import PrevButton from '../../components/prevButton';
+import { getPerson } from '../../store';
+import styles from '../../styles/Home.module.css';
 
 export default function Person() {
   const router = useRouter();
@@ -22,6 +22,8 @@ export default function Person() {
       <main className={styles.main}>
         {person &&
           <div>
+            <PrevButton href="/" />
+
             <h2>
               My Dates with {person.name}
             </h2>

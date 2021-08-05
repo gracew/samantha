@@ -1,4 +1,4 @@
-import { DateInput, RadioButtonGroup, TextInput } from 'grommet';
+import { RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../../../components/step';

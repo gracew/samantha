@@ -28,7 +28,7 @@ const questions = [
   },
   {
     id: "learn-you",
-    question: (name: string) => `Did you feel ${name} aimed to learn abouut you?`,
+    question: (name: string) => `Did you feel ${name} aimed to learn about you?`,
     options: [
       "Yes",
       "Somewhat",

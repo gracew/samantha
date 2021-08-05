@@ -7,6 +7,7 @@ import styles from '../../../styles/Home.module.css';
 
 export default function NewPersonContext() {
   const [context, setContext] = useState("");
+  const [other, setOther] = useState("");
   const router = useRouter();
   const { name } = router.query;
 
@@ -28,6 +29,7 @@ export default function NewPersonContext() {
             value={context}
             onChange={e => setContext(e.target.value)}
           />
+          {context === "Other" && <TextInput value={other} onChange={e => setOther(e.target.value)} />}
         </Step>
       </main>
 
