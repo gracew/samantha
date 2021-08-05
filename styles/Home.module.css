@@ -5,6 +5,8 @@
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  background-color: #8EC5FC;
+  background-image: linear-gradient(180deg, #8EC5FC 0%, #E0C3FC 100%);
 }
 
 .main {
@@ -13,6 +15,7 @@
 
 .main h2 {
   margin-top: 50px;
+  color: #333333;
 }
 
 .footer {
@@ -57,4 +60,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cardHeader {
+  font-size: 20px;
+}
+
+.radioButtonGroup label {
+  background: white;
+  width: 100%;
+  padding: 12px;
+  margin: 4px 0;
+  border-radius: 12px;
+}
+
+.radioButtonGroup label div {
+  margin-right: 5px;
+}
+
+.inlineIcon svg {
+  position: relative;
+  top: 2px;
+  width: 17px !important;
+  height: 17px !important;
+  margin-right: 6px;
 }

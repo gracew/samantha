@@ -1,4 +1,5 @@
 import { RadioButtonGroup, TextInput } from 'grommet';
+import { StatusUnknown } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../../../components/step';
@@ -35,6 +36,7 @@ export default function DateLocation() {
             Where did you meet for your date?
           </h2>
           <RadioButtonGroup
+            className={styles.radioButtonGroup}
             name="date-where"
             options={Object.values(Where)}
             value={where}

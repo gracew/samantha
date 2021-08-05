@@ -1,6 +1,7 @@
 import { RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
+import OtherInput from '../../../components/otherInput';
 import { Step } from '../../../components/step';
 import { addPerson } from '../../../store';
 import styles from '../../../styles/Home.module.css';
@@ -32,13 +33,13 @@ export default function NewPersonContext() {
             How did you meet {name}?
           </h2>
           <RadioButtonGroup
+            className={styles.radioButtonGroup}
             name="how-meet"
             options={Object.values(Context)}
             value={context}
             onChange={e => setContext(e.target.value)}
           />
-          {context === Context.Other && <TextInput
-            style={{ marginTop: "10px" }}
+          {context === Context.Other && <OtherInput
             value={other}
             onChange={e => setOther(e.target.value)}
           />}

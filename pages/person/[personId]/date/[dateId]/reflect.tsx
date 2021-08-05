@@ -102,6 +102,7 @@ export default function DateReflection() {
             {questions[step].question(name as string)}
           </h2>
           {questions[step].options && <RadioButtonGroup
+            className={styles.radioButtonGroup}
             name="date-question"
             options={questions[step].options!}
             value={value}

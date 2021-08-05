@@ -40,6 +40,7 @@ export default function NewDate() {
             What time of day was your date?
           </h2>
           <RadioButtonGroup
+            className={styles.radioButtonGroup}
             name="date-time"
             options={["Morning", "Lunch", "Afternoon", "Dinner", "Evening", "Late evening"]}
             value={time}

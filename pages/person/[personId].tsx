@@ -1,11 +1,12 @@
 import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
-import { Add } from 'grommet-icons';
+import { Add, Clock, Location } from 'grommet-icons';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import PrevButton from '../../components/prevButton';
 import { getPerson } from '../../store';
 import styles from '../../styles/Home.module.css';
+import { formatDate } from './util';
 
 export default function Person() {
   const router = useRouter();
@@ -30,12 +31,15 @@ export default function Person() {
 
             <div className={styles.grid}>
               {person.dates.map((d: any) => <Card key={d.id} background="light-1">
-                <CardHeader pad="medium">
-                  {moment(d.date).format("MMMM DD")}
+                <CardHeader
+                  className={styles.cardHeader}
+                  pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
+                >
+                  {formatDate(d.date)}
                 </CardHeader>
-                <CardBody pad="medium">
-                  <div>{d.time}</div>
-                  <div>{d.location}</div>
+                <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
+                  <div className={styles.inlineIcon}><Clock />{d.time}</div>
+                  <div className={styles.inlineIcon}><Location />{d.location}</div>
                 </CardBody>
               </Card>)}
 

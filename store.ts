@@ -8,13 +8,13 @@ export const data = [
     dates: [
       {
         id: "982ed36c-d072-41d5-9acf-8343d492de1f",
-        date: "2021-07-21",
+        date: "2021-08-01",
         location: "Restaurant",
         time: "Dinner",
       },
       {
         id: "1fe0ff9a-ce08-42f1-8c35-d359fd4ed927",
-        date: "2021-07-16",
+        date: "2021-07-27",
         location: "Park",
         time: "Afternoon",
       },
@@ -40,7 +40,7 @@ export const data = [
   },
   {
     id: "ef3df0e9-1115-4094-a551-60b73a1b81ec",
-    name: "Rohan",
+    name: "Alessandro",
     dates: [
       {
         id: "c0259194-be3a-4b9d-9e9d-ea9f4041bc23",
