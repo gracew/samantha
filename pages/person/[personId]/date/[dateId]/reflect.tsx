@@ -109,6 +109,7 @@ export default function DateReflection() {
             onChange={e => setValue(e.target.value)}
           />}
           {!questions[step].options && <TextArea
+            rows={6}
             value={value}
             onChange={e => setValue(e.target.value)}
           />}
