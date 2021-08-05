@@ -31,16 +31,18 @@ export default function Person() {
 
             <div className={styles.grid}>
               {person.dates.map((d: any) => <Card key={d.id} background="light-1">
-                <CardHeader
-                  className={styles.cardHeader}
-                  pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
-                >
-                  {formatDate(d.date)}
-                </CardHeader>
-                <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
-                  <div className={styles.inlineIcon}><Clock />{d.time}</div>
-                  <div className={styles.inlineIcon}><Location />{d.location}</div>
-                </CardBody>
+              <Button hoverIndicator onClick={() => router.push(`/date/${d.id}`)}>
+                  <CardHeader
+                    className={styles.cardHeader}
+                    pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
+                  >
+                    {formatDate(d.date)}
+                  </CardHeader>
+                  <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
+                    <div className={styles.inlineIcon}><Clock />{d.time}</div>
+                    <div className={styles.inlineIcon}><Location />{d.location}</div>
+                  </CardBody>
+                </Button>
               </Card>)}
 
               <Card className={styles.addButton} background="light-1">
