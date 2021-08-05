@@ -1,9 +1,8 @@
-import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
-import { Add, Link } from 'grommet-icons';
+import { Button, Card, CardBody, CardHeader } from 'grommet';
+import { Add } from 'grommet-icons';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
-import Image from 'next/image';
 import React from 'react';
 import { data } from '../store';
 import styles from '../styles/Home.module.css';
@@ -38,13 +37,8 @@ export default function Home() {
             </Card>
           )}
 
-          <Card background="light-1">
-            <CardHeader pad="medium">
-              Someone new
-            </CardHeader>
-            <CardFooter background="light-2">
-              <Button hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
-            </CardFooter>
+          <Card className={styles.addButton} background="light-1">
+            <Button hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
           </Card>
         </div>
       </main>

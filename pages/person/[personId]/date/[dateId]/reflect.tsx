@@ -69,6 +69,7 @@ const questions = [
   {
     id: "notes",
     question: (name: string) => `Thanks for taking the time to reflect on your date with ${name}! Is there anything else you want to make a note of?`,
+    optional: true,
   }
 ]
 export default function DateReflection() {
@@ -96,7 +97,7 @@ export default function DateReflection() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} onBack={() => router.push("/")}>
+        <Step onNext={onNext} nextDisabled={!questions[step].optional && value === ""} backHref="/">
           <h2>
             {questions[step].question(name as string)}
           </h2>
@@ -106,7 +107,10 @@ export default function DateReflection() {
             value={value}
             onChange={e => setValue(e.target.value)}
           />}
-          {!questions[step].options && <TextArea />}
+          {!questions[step].options && <TextArea
+            value={value}
+            onChange={e => setValue(e.target.value)}
+          />}
         </Step>
       </main>
 

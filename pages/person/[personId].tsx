@@ -39,13 +39,8 @@ export default function Person() {
                 </CardBody>
               </Card>)}
 
-              <Card background="light-1">
-                <CardHeader pad="medium">
-                  Add a date
-                </CardHeader>
-                <CardFooter background="light-2">
-                  <Button hoverIndicator icon={<Add />} onClick={() => router.push(`/person/${personId}/date/new`)} />
-                </CardFooter>
+              <Card className={styles.addButton} background="light-1">
+                <Button hoverIndicator icon={<Add />} onClick={() => router.push(`/person/${personId}/date/new`)} />
               </Card>
             </div>
           </div>}

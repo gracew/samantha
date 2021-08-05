@@ -1,9 +1,17 @@
-import { defaultProps, RadioButtonGroup, TextInput } from 'grommet';
+import { RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../components/step';
 import { addPerson } from '../../../store';
 import styles from '../../../styles/Home.module.css';
+
+enum Context {
+  Event = "Event",
+  DatingApp = "Dating app",
+  Friend = "Friend",
+  Community = "Community",
+  Other = "Other",
+}
 
 export default function NewPersonContext() {
   const [context, setContext] = useState("");
@@ -19,17 +27,21 @@ export default function NewPersonContext() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} onBack={() => router.push("/person/new/1")}>
+        <Step onNext={onNext} nextDisabled={context === "" || (context === Context.Other && other === "")} backHref={"/person/new/1"}>
           <h2>
             How did you meet {name}?
           </h2>
           <RadioButtonGroup
             name="how-meet"
-            options={["Event", "Dating app", "Friend", "Community", "Other"]}
+            options={Object.values(Context)}
             value={context}
             onChange={e => setContext(e.target.value)}
           />
-          {context === "Other" && <TextInput value={other} onChange={e => setOther(e.target.value)} />}
+          {context === Context.Other && <TextInput
+            style={{ marginTop: "10px" }}
+            value={other}
+            onChange={e => setOther(e.target.value)}
+          />}
         </Step>
       </main>
 
