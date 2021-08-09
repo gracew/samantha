@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, CardHeader } from 'grommet';
+import { Button, Card, CardBody, CardFooter, CardHeader, Main, Heading, Paragraph } from 'grommet';
 import { Add, Clock, Location } from 'grommet-icons';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
@@ -28,10 +28,10 @@ export default function Person() {
             <h2>
               My Dates with {person.name}
             </h2>
-
             <div className={styles.grid}>
+              
               {person.dates.map((d: any) => <Card key={d.id} background="light-1">
-              <Button hoverIndicator onClick={() => router.push(`/date/${d.id}`)}>
+              <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>
                   <CardHeader
                     className={styles.cardHeader}
                     pad={{ top: "large", left: "large", right: "large", bottom: "small" }}

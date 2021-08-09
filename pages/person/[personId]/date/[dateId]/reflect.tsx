@@ -38,7 +38,7 @@ const questions = [
   },
   {
     id: "fun",
-    question: (name: string) => `Did you have fun?`,
+    question: (name: string) => ` `,
     options: [
       "Yes!",
       "Somewhat",
