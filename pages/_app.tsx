@@ -8,23 +8,34 @@ import {
   SignedIn,
   SignedOut
 } from "@clerk/clerk-react";
+import { Grommet } from 'grommet';
 const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
 const clerkSignInURL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const customTheme = {
+    global: {
+      colors: {
+        brand: "#26A69A",
+      }
+    }
+  };
+
   return <ClerkProvider
     frontendApi={clerkFrontendApi}
     navigate={(to) => router.push(to)}
->
-  <>
-    <SignedIn>
-      <Component {...pageProps} />
-    </SignedIn>
-    <SignedOut>
-      <RedirectToSignIn />
-    </SignedOut>
-  </>
-</ClerkProvider>
+  >
+    <>
+      <SignedIn>
+        <Grommet theme={customTheme}>
+          <Component {...pageProps} />
+        </Grommet>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  </ClerkProvider>
 }
 export default MyApp;

@@ -3,7 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Step } from '../../../../../components/step';
 import { getPerson } from '../../../../../store';
-import styles from '../../../../../styles/Home.module.css';
+import styles from '../../../../../styles/Form.module.css';
 
 const questions = [
   {
@@ -68,7 +68,7 @@ const questions = [
   },
   {
     id: "notes",
-    question: (name: string) => `Thanks for taking the time to reflect on your date with ${name}! Is there anything else you want to make a note of?`,
+    question: (name: string) => `Thanks for reflecting on your date with ${name}!`,
     optional: true,
   }
 ]
@@ -108,11 +108,14 @@ export default function DateReflection() {
             value={value}
             onChange={e => setValue(e.target.value)}
           />}
-          {!questions[step].options && <TextArea
-            rows={6}
-            value={value}
-            onChange={e => setValue(e.target.value)}
-          />}
+          {!questions[step].options && <div>
+            <p className={styles.descriptionText}>Is there anything else you want to make a note of?</p>
+            <TextArea
+              rows={6}
+              value={value}
+              onChange={e => setValue(e.target.value)}
+            />
+          </div>}
         </Step>
       </main>
 

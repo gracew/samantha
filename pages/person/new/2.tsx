@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import OtherInput from '../../../components/otherInput';
 import { Step } from '../../../components/step';
 import { addPerson } from '../../../store';
-import styles from '../../../styles/Home.module.css';
+import styles from '../../../styles/Form.module.css';
 
 enum Context {
   Event = "Event",

@@ -1,0 +1,33 @@
+.container {
+  min-height: 100vh;
+  padding: 0 20px;
+  display: flex;
+  background-color: #00897B;
+}
+
+.main {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.main h2 {
+  margin-top: 40px;
+  color: white;
+}
+
+.radioButtonGroup label {
+  background: white;
+  width: 100%;
+  padding: 12px;
+  margin: 4px 0;
+  border-radius: 12px;
+}
+
+.radioButtonGroup label div {
+  margin-right: 5px;
+}
+
+.descriptionText {
+  color: white;
+}

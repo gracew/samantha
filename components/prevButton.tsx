@@ -9,6 +9,6 @@ interface PrevButtonProps {
 
 export default function PrevButton(props: PrevButtonProps) {
   return <div className={styles.prevButton}>
-    <Link href={props.href}><Previous /></Link>
+    <Link href={props.href}><Previous color="white"/></Link>
   </div>;
 }
