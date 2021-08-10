@@ -11,18 +11,39 @@ export const data = [
         date: "2021-08-01",
         location: "Restaurant",
         time: "Dinner",
+        comfort: "Yes",
+        genuine: "Somewhat",
+        you: "Somewhat",
+        fun: "Yes!",
+        them: "Yes",
+        physical: "Not sure",
+        notes: "Seems like a chill person",
       },
       {
         id: "1fe0ff9a-ce08-42f1-8c35-d359fd4ed927",
         date: "2021-07-27",
         location: "Park",
         time: "Afternoon",
+        comfort: "Yes",
+        genuine: "Somewhat",
+        you: "Yes",
+        fun: "Somewhat",
+        them: "Somewhat",
+        physical: "Some",
+        notes: "Does improv",
       },
       {
         id: "2f2dd852-633c-4106-bc49-c007a3d9b053",
         date: "2021-07-14",
         location: "Cafe",
         time: "Afternoon",
+        comfort: "Yes, felt like we'd known each other forever!",
+        genuine: "Yes",
+        you: "Yes",
+        fun: "Yes!",
+        them: "Yes",
+        physical: "A lot!",
+        notes: "",
       },
     ],
   },
@@ -35,6 +56,14 @@ export const data = [
         date: "2021-07-18",
         location: "Bar",
         time: "Afternoon",
+        comfort: "No",
+        genuine: "Yes",
+        you: "No",
+        fun: "No",
+        them: "Somewhat",
+        physical: "Absolutely not",
+        notes: "",
+
       },
     ],
   },
@@ -47,6 +76,13 @@ export const data = [
         date: "2021-07-10",
         location: "Cafe",
         time: "Lunch",
+        comfort: "Somewhat",
+        genuine: "Not sure",
+        you: "Not sure",
+        fun: "No",
+        them: "Somewhat",
+        physical: "Absolutely not",
+        notes: "",
       },
     ],
   },
@@ -54,6 +90,11 @@ export const data = [
 
 export function getPerson(id: string) {
   return data.find(p => p.id === id);
+}
+
+export function getDate(pId:string, dId: string) {
+  const person = data.find(p => p.id === pId);
+  return person?.dates.find(d=> d.id === dId);
 }
 
 export function addPerson(person: { name: string, context: string }) {
