@@ -5,7 +5,7 @@ import { Step } from '../../../../../components/step';
 import { getPerson } from '../../../../../store';
 import styles from '../../../../../styles/Form.module.css';
 
-const questions = [
+export const questions = [
   {
     id: "comfort",
     question: (name: string) => `Did you feel comfortable around ${name}?`,
@@ -69,6 +69,7 @@ const questions = [
   {
     id: "notes",
     question: (name: string) => `Thanks for reflecting on your date with ${name}!`,
+    description: "Notes",
     optional: true,
   }
 ]

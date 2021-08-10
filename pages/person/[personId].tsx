@@ -8,7 +8,7 @@ import styles from '../../styles/Home.module.css';
 import { formatDate } from './util';
 import { Where } from './[personId]/date/[dateId]/where';
 
-function getIcon(where: Where) {
+export function getIcon(where: Where) {
   switch (where) {
     case Where.PhoneCall:
       return <Phone />;
