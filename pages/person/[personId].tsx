@@ -1,5 +1,5 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Video } from 'grommet';
-import { Add, Bar, Brush, Cafeteria, Clock, Grow, Java, Location, New, Phone } from 'grommet-icons';
+import { Button, Card, CardBody, CardHeader, Video } from 'grommet';
+import { Add, Bar, Brush, Cafeteria, Clock, Grow, Java, New, Phone } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import PrevButton from '../../components/prevButton';
@@ -49,19 +49,21 @@ export default function Person() {
             <h2>
               My Dates with {person.name}
             </h2>
-
             <div className={styles.grid}>
+
               {person.dates.map((d: any) => <Card className={styles.card} key={d.id} background="light-1">
-                <CardHeader
-                  className={styles.cardHeader}
-                  pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
-                >
-                  {formatDate(d.date)}
-                </CardHeader>
-                <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
-                  <div className={styles.inlineIcon}><Clock />{d.time}</div>
-                  <div className={styles.inlineIcon}>{getIcon(d.location)}{d.location}</div>
-                </CardBody>
+                <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>
+                  <CardHeader
+                    className={styles.cardHeader}
+                    pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
+                  >
+                    {formatDate(d.date)}
+                  </CardHeader>
+                  <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
+                    <div className={styles.inlineIcon}><Clock />{d.time}</div>
+                    <div className={styles.inlineIcon}>{getIcon(d.location)}{d.location}</div>
+                  </CardBody>
+                </Button>
               </Card>)}
 
               <Card className={styles.card} background="light-1">

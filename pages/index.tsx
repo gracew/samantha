@@ -44,6 +44,7 @@ export default function Home() {
           <Card className={styles.card} background="light-1">
             <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
           </Card>
+          
         </div>
       </main>
 
