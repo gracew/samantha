@@ -38,7 +38,7 @@ export default function Date() {
                   <Paragraph > Did you feel {person.name} was genuine?: {date.genuine} </Paragraph>
                   <Paragraph > Did you feel {person.name} aimed to learn about you?: {date.you} </Paragraph>
                   <Paragraph > Did you have fun?: {date.fun} </Paragraph>
-                  <Paragraph > Are you curious to learn more about {}?: {date.them} </Paragraph>
+                  <Paragraph > Are you curious to learn more about {person.name}?: {date.them} </Paragraph>
                   <Paragraph> Did you feel some level of physical attraction?: {date.physical} </Paragraph>
                   <Paragraph> Notes: {date.notes} </Paragraph>
                 </Main>
