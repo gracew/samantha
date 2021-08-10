@@ -1,12 +1,12 @@
-import { RadioButtonGroup, TextInput } from 'grommet';
-import { StatusUnknown } from 'grommet-icons';
+import { RadioButtonGroup, TextInput, Video } from 'grommet';
+import { Bar, Brush, Cafeteria, Grow, IceCream, Java, New, Phone, StatusUnknown } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../../../components/step';
 import { updateDate } from '../../../../../store';
-import styles from '../../../../../styles/Home.module.css';
+import styles from '../../../../../styles/Form.module.css';
 
-enum Where {
+export enum Where {
   PhoneCall = "Phone call",
   VideoCall = "Video call",
   Park = "Park",

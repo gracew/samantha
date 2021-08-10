@@ -25,7 +25,7 @@ export default function Home() {
 
         <div className={styles.grid}>
           {data.map(d =>
-            <Card key={d.id} background="light-1">
+            <Card className={styles.card} key={d.id} background="light-1">
               <Button hoverIndicator onClick={() => router.push(`/person/${d.id}`)}>
                 <CardHeader
                   className={styles.cardHeader}
@@ -41,8 +41,8 @@ export default function Home() {
             </Card>
           )}
 
-          <Card className={styles.addButton} background="light-1">
-            <Button hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
+          <Card className={styles.card} background="light-1">
+            <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
           </Card>
           
         </div>

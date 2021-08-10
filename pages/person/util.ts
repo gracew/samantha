@@ -5,7 +5,7 @@ export function formatDate(date: string) {
     lastDay: '[Yesterday]',
     sameDay: '[Today]',
     lastWeek: '[last] ddd',
-    sameElse: 'MMMM DD'
+    sameElse: 'MMMM D'
   });
 
   // capitalize first letter

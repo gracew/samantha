@@ -1,0 +1,48 @@
+.container {
+  min-height: 100vh;
+  padding: 0 20px;
+  display: flex;
+  background-color: #00897B;
+}
+
+.main {
+  width: 94%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+.main h2 {
+  margin-top: 40px;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+
+.iconCard {
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  box-shadow: none !important;
+  margin: 10px 0;
+}
+
+.cardHeader {
+  font-family: NimbusSansExd, sans-serif;
+  font-weight: bold;
+}
+
+.inlineIcon svg {
+  position: relative;
+  top: 2px;
+  width: 17px !important;
+  height: 17px !important;
+  margin-right: 6px;
+}

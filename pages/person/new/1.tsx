@@ -1,8 +1,8 @@
-import { RadioButtonGroup, TextInput } from 'grommet';
+import { TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../components/step';
-import styles from '../../../styles/Home.module.css';
+import styles from '../../../styles/Form.module.css';
 
 export default function NewPersonName() {
   const [name, setName] = useState("");
