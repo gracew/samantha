@@ -1,15 +1,25 @@
 import { Button, Card, CardBody, CardHeader } from 'grommet';
-import { Add, Calendar } from 'grommet-icons';
-import moment from 'moment';
+import { Add } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
-import React from 'react';
-import { data } from '../store';
+import React, { useEffect, useState } from 'react';
+import { getPersons, Person } from '../store';
 import styles from '../styles/Home.module.css';
 import { formatDate } from './person/util';
 
 export default function Home() {
   const router = useRouter();
+  const [data, setData] = useState<Person[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getPersons().then(parsed => {
+      setData(parsed);
+      setLoading(false);
+    });
+  })
+
   return (
     <div className={styles.container}>
       <Head>
@@ -44,7 +54,7 @@ export default function Home() {
           <Card className={styles.card} background="light-1">
             <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
           </Card>
-          
+
         </div>
       </main>
 

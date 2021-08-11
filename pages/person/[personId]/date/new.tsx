@@ -1,4 +1,4 @@
-import { DateInput, RadioButtonGroup, TextInput } from 'grommet';
+import { DateInput, RadioButtonGroup } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Step } from '../../../../components/step';
@@ -13,12 +13,11 @@ export default function NewDate() {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    const person = getPerson(personId as string);
-    setName(person!.name);
+    getPerson(personId as string).then(parsed => setName(parsed.name));
   });
 
-  function onNext() {
-    const dateId = addDate(personId as string, { date, time });
+  async function onNext() {
+    const dateId = await addDate(personId as string, { date, time });
     router.push(`/person/${personId}/date/${dateId}/where`);
   }
 

@@ -1,5 +1,4 @@
-import { RadioButtonGroup, TextInput, Video } from 'grommet';
-import { Bar, Brush, Cafeteria, Grow, IceCream, Java, New, Phone, StatusUnknown } from 'grommet-icons';
+import { RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import { Step } from '../../../../../components/step';
@@ -18,20 +17,20 @@ export enum Where {
 }
 
 export default function DateLocation() {
-  const [where, setWhere] = useState("");
+  const [location, setLocation] = useState("");
   const [other, setOther] = useState("");
   const router = useRouter();
   const { personId, dateId } = router.query;
 
-  function onNext() {
-    updateDate(personId as string, dateId as string, { where, other });
+  async function onNext() {
+    await updateDate(dateId as string, { location, location_other: other });
     router.push(`/person/${personId}/date/${dateId}/reflect`);
   }
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={where === "" || (where === Where.SomewhereElse && other === "")} backHref={"/"}>
+        <Step onNext={onNext} nextDisabled={location === "" || (location === Where.SomewhereElse && other === "")} backHref={"/"}>
           <h2>
             Where did you meet for your date?
           </h2>
@@ -39,10 +38,10 @@ export default function DateLocation() {
             className={styles.radioButtonGroup}
             name="date-where"
             options={Object.values(Where)}
-            value={where}
-            onChange={e => setWhere(e.target.value)}
+            value={location}
+            onChange={e => setLocation(e.target.value)}
           />
-          {where === Where.SomewhereElse && <TextInput
+          {location === Where.SomewhereElse && <TextInput
             style={{ marginTop: "10px" }}
             value={other}
             onChange={e => setOther(e.target.value)}
