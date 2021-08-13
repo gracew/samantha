@@ -6,7 +6,7 @@ import { Step } from '../../../components/step';
 import { addPerson } from '../../../store';
 import styles from '../../../styles/Form.module.css';
 
-enum Context {
+export enum Context {
   Event = "Event",
   DatingApp = "Dating app",
   Friend = "Friend",
