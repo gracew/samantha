@@ -8,7 +8,7 @@ async function handler(
 ) {
   // https://stackoverflow.com/questions/24155190/postgresql-left-join-json-agg-ignore-remove-null
   const query = `select p.id, p.name, p.context, p.context_other,
-coalesce(json_agg(dates) filter (where dates.id is not null), '[]') as dates
+coalesce(json_agg(dates order by dates.date desc) filter (where dates.id is not null), '[]') as dates
 from persons p
 left join dates on p.id = dates.person_id
 where p.user_id = $1 and p.id = $2

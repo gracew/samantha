@@ -1,4 +1,5 @@
 import { DateInput, RadioButtonGroup } from 'grommet';
+import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Step } from '../../../../components/step';
@@ -39,6 +40,7 @@ export default function NewDate() {
 
           <DateInput
             format="mm/dd/yyyy"
+            calendarProps={{bounds: [moment().subtract(6, "months").format(), moment().format()]}}
             value={date}
             onChange={({ value }) => setDate(value as string)}
           />

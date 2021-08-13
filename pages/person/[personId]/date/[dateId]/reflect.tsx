@@ -89,7 +89,7 @@ export default function DateReflection() {
     setLoading(true);
     await updateDate(dateId as string, { reflection: { [questions[step].id]: value } });
     if (step === questions.length - 1) {
-      router.push(`/`);
+      router.push(`/person/${personId}`);
     } else {
       setLoading(false);
       setStep(step + 1);

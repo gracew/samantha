@@ -25,11 +25,11 @@ export default function Date() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <PrevButton href="/" />
+        <PrevButton href={`/person/${personId}`} />
         {!(person && date) && <CenteredSpinner />}
         {person && date &&
           <div>
-            <h2>Date on {formatDate(date.date)} with {person.name}</h2>
+            <h2>Date {formatDate(date.date, true)} with {person.name}</h2>
             <div className={styles.grid}>
               <Card className={styles.iconCard} pad="medium" background="light-1"> <Clock />{date.time}</Card>
               <Card className={styles.iconCard} pad="medium" background="light-1"> {getIcon(date.location)}{date.location}</Card>
