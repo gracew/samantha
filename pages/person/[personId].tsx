@@ -7,7 +7,7 @@ import PrevButton from '../../components/prevButton';
 import { Person as IPerson, getPerson } from '../../store';
 import styles from '../../styles/Home.module.css';
 import { Context } from './new/2';
-import { formatDate, lowerCaseFirstLetter } from './util';
+import { formatDate, lowerCaseFirstLetter } from '../../components/util';
 import { Where } from './[personId]/date/[dateId]/where';
 
 export function getIcon(where: Where) {
