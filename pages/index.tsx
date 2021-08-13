@@ -6,7 +6,7 @@ import CenteredSpinner from '../components/centeredSpinner';
 import Navbar from '../components/navbar';
 import { getPersons, Person } from '../store';
 import styles from '../styles/Home.module.css';
-import { formatDate } from './person/util';
+import { formatDate } from '../components/util';
 
 export default function Home() {
   const router = useRouter();

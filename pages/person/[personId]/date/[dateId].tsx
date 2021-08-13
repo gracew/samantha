@@ -6,7 +6,7 @@ import CenteredSpinner from '../../../../components/centeredSpinner';
 import PrevButton from '../../../../components/prevButton';
 import { getDate, getPerson, Person } from '../../../../store';
 import styles from '../../../../styles/Date.module.css';
-import { formatDate } from '../../util';
+import { formatDate } from '../../../../components/util';
 import { getIcon } from '../../[personId]';
 import { questions } from './[dateId]/reflect';
 
@@ -36,7 +36,7 @@ export default function Date() {
             </div>
 
             {questions.map(q =>
-              <Card className={styles.card} background="light-1">
+              <Card key={q.id} className={styles.card} background="light-1">
                 <CardHeader
                   background="light-3"
                   className={styles.cardHeader}
