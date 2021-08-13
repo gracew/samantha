@@ -4,9 +4,10 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import CenteredSpinner from '../../components/centeredSpinner';
 import PrevButton from '../../components/prevButton';
-import { getPerson } from '../../store';
+import { Person as IPerson, getPerson } from '../../store';
 import styles from '../../styles/Home.module.css';
-import { formatDate } from './util';
+import { Context } from './new/2';
+import { formatDate, lowerCaseFirstLetter } from './util';
 import { Where } from './[personId]/date/[dateId]/where';
 
 export function getIcon(where: Where) {
@@ -30,33 +31,48 @@ export function getIcon(where: Where) {
   }
 }
 
+export function getContext(person: IPerson) {
+  const s = person.context === Context.Other ? person.context_other : person.context;
+  return lowerCaseFirstLetter(s || "");
+}
+
+export function getContextEmoji(context: Context) {
+  switch (context) {
+    case Context.Event:
+      return <span role="img" aria-label="emoji-balloon">🎈</span>;
+    case Context.DatingApp:
+      return <span role="img" aria-label="emoji-mobile-phone">📱</span>;
+    case Context.Friend:
+      return <span role="img" aria-label="emoji-blush">😊</span>;
+    case Context.Community:
+      return <span role="img" aria-label="emoji-classical-building">🏛️</span>;
+    default:
+      return "";
+  }
+}
+
 export default function Person() {
   const router = useRouter();
   const { personId } = router.query;
   const [person, setPerson] = useState<any>();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    getPerson(personId as string).then(person => {
-      setPerson(person);
-      setLoading(false);
-    });
+    getPerson(personId as string).then(person => setPerson(person));
   }, [personId]);
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        {person &&
-          <div>
-            <PrevButton href="/" />
+        <div>
+          <PrevButton href="/" />
 
+          {!person && <CenteredSpinner />}
+          {person && <div>
             <h2>
               My Dates with {person.name}
             </h2>
-
-            {loading && <CenteredSpinner />}
-            {!loading && <div className={styles.grid}>
+            <p>You met {person.name} through a {getContext(person)} {getContextEmoji(person.context)}</p>
+            <div className={styles.grid}>
               {person.dates.map((d: any) => <Card className={styles.card} key={d.id} background="light-1">
                 <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>
                   <CardHeader
@@ -75,8 +91,9 @@ export default function Person() {
               <Card className={styles.card} background="light-1">
                 <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push(`/person/${personId}/date/new`)} />
               </Card>
-            </div>}
+            </div>
           </div>}
+        </div>
       </main>
 
     </div>
