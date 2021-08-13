@@ -36,7 +36,7 @@ export default function Person() {
 
   useEffect(() => {
     getPerson(personId as string).then(person => setPerson(person));
-  });
+  }, [personId]);
 
   return (
     <div className={styles.container}>
