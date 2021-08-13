@@ -100,7 +100,14 @@ export default function DateReflection() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={!questions[step].optional && value === ""} backHref="/" loading={loading}>
+        <Step
+          label={step === questions.length - 1 ? "Done" : "Next"}
+          onNext={onNext}
+          nextDisabled={!questions[step].optional && value === ""}
+          backHref="/"
+          loading={loading}
+          progress={(step + 2) / (questions.length + 2) * 100}
+        >
           <h2>
             {questions[step].question(name as string)}
           </h2>

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Step } from '../../../../../components/step';
 import { updateDate } from '../../../../../store';
 import styles from '../../../../../styles/Form.module.css';
+import { questions } from './reflect';
 
 export enum Where {
   PhoneCall = "Phone call",
@@ -33,10 +34,12 @@ export default function DateLocation() {
     <div className={styles.container}>
       <main className={styles.main}>
         <Step
+          label="Next"
           onNext={onNext}
           nextDisabled={location === "" || (location === Where.SomewhereElse && other === "")}
           backHref={"/"}
           loading={loading}
+          progress={1 / (questions.length + 2) * 100}
         >
           <h2>
             Where did you meet for your date?

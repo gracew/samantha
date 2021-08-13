@@ -33,7 +33,8 @@ export function getIcon(where: Where) {
 
 export function getContext(person: IPerson) {
   const s = person.context === Context.Other ? person.context_other : person.context;
-  return lowerCaseFirstLetter(s || "");
+  const article = person.context === Context.Event ? "an" : "a";
+  return `${article} ${lowerCaseFirstLetter(s || "")}`;
 }
 
 export function getContextEmoji(context: Context) {
@@ -71,7 +72,7 @@ export default function Person() {
             <h2>
               My Dates with {person.name}
             </h2>
-            <p>You met {person.name} through a {getContext(person)} {getContextEmoji(person.context)}</p>
+            <p>You met {person.name} through {getContext(person)} {getContextEmoji(person.context)}</p>
             <div className={styles.grid}>
               {person.dates.map((d: any) => <Card className={styles.card} key={d.id} background="light-1">
                 <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>

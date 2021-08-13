@@ -1,3 +1,21 @@
+.prevAndProgress {
+  display: flex;
+}
+
+@media only screen and (min-width: 400px) {
+  .prevAndProgress {
+    display: block;
+  }
+
+  .progressContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -32px;
+  }
+}
+
+
 .nextButton {
   margin: 40px 0 !important;
   padding: 8px !important;

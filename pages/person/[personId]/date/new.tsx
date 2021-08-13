@@ -26,7 +26,13 @@ export default function NewDate() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={date === "" || time === ""} backHref="/" loading={loading}>
+        <Step
+          label="Next"
+          onNext={onNext}
+          nextDisabled={date === "" || time === ""}
+          backHref={`/person/${personId}`}
+          loading={loading}
+        >
           <h2>
             When was your date with {name}?
           </h2>
