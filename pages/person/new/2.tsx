@@ -20,9 +20,8 @@ export default function NewPersonContext() {
   const router = useRouter();
   const { name } = router.query;
 
-  function onNext() {
-    // TODO(gracew): swap out w/ backend call
-    const id = addPerson({ name: name as string, context })
+  async function onNext() {
+    const id = await addPerson({ name: name as string, context, context_other: other });
     router.push(`/person/${id}/date/new`);
   }
   return (

@@ -35,8 +35,7 @@ export default function Person() {
   const [person, setPerson] = useState<any>();
 
   useEffect(() => {
-    const person = getPerson(personId as string);
-    setPerson(person);
+    getPerson(personId as string).then(person => setPerson(person));
   });
 
   return (

@@ -1,129 +1,69 @@
 
-import * as uuid from "uuid";
 
-export const data = [
-  {
-    id: "2e1fdaba-8478-4d4d-83f3-28346923e484",
-    name: "David",
-    dates: [
-      {
-        id: "982ed36c-d072-41d5-9acf-8343d492de1f",
-        date: "2021-08-01",
-        location: "Restaurant",
-        time: "Dinner",
-        comfort: "Yes",
-        genuine: "Somewhat",
-        "learn-you": "Somewhat",
-        fun: "Yes!",
-        "learn-them": "Yes",
-        physical: "Not sure",
-        notes: "Seems like a chill person",
-      },
-      {
-        id: "1fe0ff9a-ce08-42f1-8c35-d359fd4ed927",
-        date: "2021-07-27",
-        location: "Park",
-        time: "Afternoon",
-        comfort: "Yes",
-        genuine: "Somewhat",
-        "learn-you": "Yes",
-        fun: "Somewhat",
-        "learn-them": "Somewhat",
-        physical: "Some",
-        notes: "Does improv",
-      },
-      {
-        id: "2f2dd852-633c-4106-bc49-c007a3d9b053",
-        date: "2021-07-14",
-        location: "Cafe",
-        time: "Afternoon",
-        comfort: "Yes, felt like we'd known each other forever!",
-        genuine: "Yes",
-        "learn-you": "Yes",
-        fun: "Yes!",
-        "learn-them": "Yes",
-        physical: "A lot!",
-        notes: "",
-      },
-    ],
-  },
-  {
-    id: "d7aff75d-4798-4892-a5b3-06541f2b4e7d",
-    name: "Tom",
-    dates: [
-      {
-        id: "4a783446-7ce2-46ff-b399-235a83b5a022",
-        date: "2021-07-18",
-        location: "Bar",
-        time: "Afternoon",
-        comfort: "No",
-        genuine: "Yes",
-        "learn-you": "No",
-        fun: "No",
-        "learn-them": "Somewhat",
-        physical: "Absolutely not",
-        notes: "",
-
-      },
-    ],
-  },
-  {
-    id: "ef3df0e9-1115-4094-a551-60b73a1b81ec",
-    name: "Alessandro",
-    dates: [
-      {
-        id: "c0259194-be3a-4b9d-9e9d-ea9f4041bc23",
-        date: "2021-07-10",
-        location: "Cafe",
-        time: "Lunch",
-        comfort: "Somewhat",
-        genuine: "Not sure",
-        "learn-you": "Not sure",
-        fun: "No",
-        "learn-them": "Somewhat",
-        physical: "Absolutely not",
-        notes: "",
-      },
-    ],
-  },
-];
-
-export function getPerson(id: string) {
-  return data.find(p => p.id === id);
+export interface Person {
+  id: string;
+  name: string;
+  context?: string;
+  context_other?: string;
+  dates: Date[];
 }
 
-export function getDate(pId:string, dId: string) {
-  const person = data.find(p => p.id === pId);
-  return person?.dates.find(d=> d.id === dId);
+export interface Date {
+  id: string;
+  date: string;
+  time: string;
+  location?: string;
+  location_other?: string;
+  reflection?: any;
 }
 
-export function addPerson(person: { name: string, context: string }) {
-  const id = uuid.v4();
-  data.push({
-    id,
-    name: person.name,
-    dates: [],
+export async function getPersons() {
+  const res = await fetch("/api/getPersons");
+  return res.json();
+}
+
+export async function getPerson(id: string) {
+  const res = await fetch("/api/getPerson", {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ id }),
   });
-  console.log(data);
-  return id;
+  return res.json();
 }
 
-export function addDate(personId: string, metadata: any) {
-  const id = uuid.v4();
-  const person = data.find(p => p.id === personId);
-  person?.dates.push({ ...metadata, id });
-  return id;
-}
-
-export function updateDate(personId: string, dateId: string, metadata: any) {
-  const person = data.find(p => p.id === personId);
-  if (!person) {
-    return;
-  }
-  person.dates = person.dates.map(d => {
-    if (d.id === dateId) {
-      return { ...d, ...metadata };
-    }
-    return d;
+export async function getDate(id: string) {
+  const res = await fetch("/api/getDate", {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ id }),
   });
+  return res.json();
+}
+
+export async function addPerson(person: Partial<Person>) {
+    const res = await fetch("/api/addPerson", {
+      method: 'post',
+      headers: { 'content-type': 'application/json'},
+      body: JSON.stringify(person),
+    }).then(res => res.json());
+    // TODO(gracew): better handle error case
+    return res[0].id;
+}
+
+export async function addDate(person_id: string, date: Partial<Date>) {
+    const res = await fetch("/api/addDate", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ person_id, ...date }),
+    }).then(res => res.json());
+    // TODO(gracew): better handle error case
+    return res[0].id;
+}
+
+export async function updateDate(id: string, metadata: Partial<Date>) {
+    await fetch("/api/updateDate", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id, ...metadata }),
+    });
 }

@@ -2,7 +2,7 @@ import { RadioButtonGroup, TextArea } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Step } from '../../../../../components/step';
-import { getPerson } from '../../../../../store';
+import { getPerson, updateDate } from '../../../../../store';
 import styles from '../../../../../styles/Form.module.css';
 
 export const questions = [
@@ -27,7 +27,7 @@ export const questions = [
     ],
   },
   {
-    id: "learn-you",
+    id: "learn_you",
     question: (name: string) => `Did you feel ${name} aimed to learn about you?`,
     options: [
       "Yes",
@@ -47,7 +47,7 @@ export const questions = [
     ],
   },
   {
-    id: "learn-them",
+    id: "learn_them",
     question: (name: string) => `Are you curious to learn more about ${name}?`,
     options: [
       "Yes",
@@ -81,12 +81,11 @@ export default function DateReflection() {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    const person = getPerson(personId as string);
-    setName(person!.name);
+    getPerson(personId as string).then(p => setName(p!.name));
   });
 
-  function onNext() {
-    // TODO(gracew): save to DB
+  async function onNext() {
+    await updateDate(dateId as string, { reflection: { [questions[step].id]: value } });
     if (step === questions.length - 1) {
       router.push(`/`);
     } else {

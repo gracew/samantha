@@ -3,7 +3,7 @@ import { Clock } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import PrevButton from '../../../../components/prevButton';
-import { getDate, getPerson } from '../../../../store';
+import { getDate, getPerson, Person } from '../../../../store';
 import styles from '../../../../styles/Date.module.css';
 import { formatDate } from '../../util';
 import { getIcon } from '../../[personId]';
@@ -14,20 +14,17 @@ export default function Date() {
   const { dateId } = router.query;
   const [date, setDate] = useState<any>();
   const { personId } = router.query;
-  const [person, setPerson] = useState<any>();
+  const [person, setPerson] = useState<Person>();
 
   useEffect(() => {
-    const date = getDate(personId as string, dateId as string);
-    setDate(date);
-    const person = getPerson(personId as string);
-    setPerson(person);
-  });
-
+    getPerson(personId as string).then(p => setPerson(p));
+    getDate(dateId as string).then(date => setDate(date));
+  }, [dateId, personId]);
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        {date &&
+        {person && date &&
           <div>
             <PrevButton href="/" />
 
@@ -45,7 +42,9 @@ export default function Date() {
                   pad={{ horizontal: "medium", top: "medium", bottom: "small" }}>
                   {q.description || q.question(person.name)}
                 </CardHeader>
-                <CardBody pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>{date[q.id]}</CardBody>
+                <CardBody pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>
+                  {date.reflection[q.id]}
+                </CardBody>
               </Card>
             )}
           </div>
