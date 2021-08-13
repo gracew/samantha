@@ -49,8 +49,8 @@ export function getContextEmoji(context: Context) {
     default:
       return "";
   }
-
 }
+
 export default function Person() {
   const router = useRouter();
   const { personId } = router.query;
