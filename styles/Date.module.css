@@ -39,10 +39,6 @@
   font-weight: bold;
 }
 
-.inlineIcon svg {
-  position: relative;
-  top: 2px;
-  width: 17px !important;
-  height: 17px !important;
-  margin-right: 6px;
+.answer {
+  white-space: pre-wrap;
 }

@@ -43,7 +43,7 @@ export default function Date() {
                   pad={{ horizontal: "medium", top: "medium", bottom: "small" }}>
                   {q.description || q.question(person.name)}
                 </CardHeader>
-                <CardBody pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>
+                <CardBody className={styles.answer} pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>
                   {date.reflection[q.id]}
                 </CardBody>
               </Card>
