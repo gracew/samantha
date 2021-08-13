@@ -19,7 +19,7 @@ async function handler(
   const query = "update dates set location = coalesce($1, location), reflection = reflection || $2 where id = $3";
   await client.query(query, [
     req.body.location,
-    req.body.reflection,
+    req.body.reflection || {},
     req.body.id,
   ]);
   res.status(200).end();
