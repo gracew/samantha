@@ -67,6 +67,10 @@
   box-shadow: none !important;
 }
 
+.cardButton {
+  height: 100%;
+}
+
 .cardHeader {
   font-size: 20px;
   font-family: NimbusSansExd, sans-serif;

@@ -2,11 +2,12 @@ import { Button, Card, CardBody, CardHeader } from 'grommet';
 import { Add } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
+import * as uuid from "uuid";
 import CenteredSpinner from '../components/centeredSpinner';
 import Navbar from '../components/navbar';
+import { formatDate } from '../components/util';
 import { getPersons, Person } from '../store';
 import styles from '../styles/Home.module.css';
-import { formatDate } from '../components/util';
 
 export default function Home() {
   const router = useRouter();
@@ -20,6 +21,10 @@ export default function Home() {
       setLoading(false);
     });
   }, []);
+
+  async function onAddPerson() {
+    router.push(`/person/${uuid.v4()}/edit`);
+  }
 
   return (
     <div>
@@ -35,7 +40,7 @@ export default function Home() {
           {!loading && <div className={styles.grid}>
             {persons.map(person =>
               <Card className={styles.card} key={person.id} background="light-1">
-                <Button hoverIndicator onClick={() => router.push(`/person/${person.id}`)}>
+                <Button className={styles.cardButton} hoverIndicator onClick={() => router.push(`/person/${person.id}`)}>
                   <CardHeader
                     className={styles.cardHeader}
                     pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
@@ -51,7 +56,7 @@ export default function Home() {
             )}
 
             <Card className={styles.card} background="light-1">
-              <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
+              <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={onAddPerson} />
             </Card>
 
           </div>}

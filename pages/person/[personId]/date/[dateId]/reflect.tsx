@@ -76,6 +76,7 @@ export const questions = [
 export default function DateReflection() {
   const [step, setStep] = useState(0);
   const [value, setValue] = useState("");
+  const [allValues, setAllValues] = useState<Record<string, string>>({});
   const router = useRouter();
   const { personId, dateId } = router.query;
   const [name, setName] = useState("");
@@ -83,28 +84,41 @@ export default function DateReflection() {
 
   useEffect(() => {
     getPerson(personId as string).then(p => setName(p!.name));
-  });
+  }, [personId]);
+
+  async function onBack() {
+    if (step === 0) {
+      router.push(`/person/${personId}/date/${dateId}/where`);
+    } else {
+      setStep(step - 1);
+      setValue(allValues[questions[step - 1].id])
+    }
+  }
 
   async function onNext() {
     setLoading(true);
+    setAllValues({ ...allValues, [questions[step].id]: value });
     await updateDate(dateId as string, { reflection: { [questions[step].id]: value } });
     if (step === questions.length - 1) {
       router.push(`/person/${personId}`);
     } else {
       setLoading(false);
       setStep(step + 1);
-      setValue("");
+      setValue(allValues[questions[step + 1].id] || "");
     }
   }
 
+  console.log(step);
+  console.log(questions[step].id);
+  console.log(allValues[questions[step].id]);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <Step
           label={step === questions.length - 1 ? "Done" : "Next"}
           onNext={onNext}
+          onBack={onBack}
           nextDisabled={!questions[step].optional && value === ""}
-          backHref="/"
           loading={loading}
           progress={(step + 2) / (questions.length + 2) * 100}
         >

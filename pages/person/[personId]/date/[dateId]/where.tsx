@@ -1,8 +1,8 @@
 import { RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Step } from '../../../../../components/step';
-import { updateDate } from '../../../../../store';
+import { getDate, updateDate } from '../../../../../store';
 import styles from '../../../../../styles/Form.module.css';
 import { questions } from './reflect';
 
@@ -24,6 +24,15 @@ export default function DateLocation() {
   const { personId, dateId } = router.query;
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    getDate(dateId as string).then(date => {
+      if (date) {
+        setLocation(date.location);
+        setOther(date.location_other);
+      }
+    });
+  }, [dateId]);
+
   async function onNext() {
     setLoading(true);
     await updateDate(dateId as string, { location, location_other: other });
@@ -37,7 +46,7 @@ export default function DateLocation() {
           label="Next"
           onNext={onNext}
           nextDisabled={location === "" || (location === Where.SomewhereElse && other === "")}
-          backHref={"/"}
+          backHref={`/person/${personId}/date/${dateId}/when`}
           loading={loading}
           progress={1 / (questions.length + 2) * 100}
         >

@@ -2,13 +2,14 @@ import { Button, Card, CardBody, CardHeader, Video } from 'grommet';
 import { Add, Bar, Brush, Cafeteria, Clock, Grow, Java, New, Phone } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
+import * as uuid from "uuid";
 import CenteredSpinner from '../../components/centeredSpinner';
 import PrevButton from '../../components/prevButton';
-import { Person as IPerson, getPerson } from '../../store';
-import styles from '../../styles/Home.module.css';
-import { Context } from './new/2';
 import { formatDate, lowerCaseFirstLetter } from '../../components/util';
+import { getPerson, Person as IPerson } from '../../store';
+import styles from '../../styles/Home.module.css';
 import { Where } from './[personId]/date/[dateId]/where';
+import { Context } from './[personId]/edit';
 
 export function getIcon(where: Where) {
   switch (where) {
@@ -61,6 +62,10 @@ export default function Person() {
     getPerson(personId as string).then(person => setPerson(person));
   }, [personId]);
 
+  function onAddDate() {
+    router.push(`/person/${personId}/date/${uuid.v4()}/when`);
+  }
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -90,7 +95,7 @@ export default function Person() {
               </Card>)}
 
               <Card className={styles.card} background="light-1">
-                <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push(`/person/${personId}/date/new`)} />
+                <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={onAddDate} />
               </Card>
             </div>
           </div>}
