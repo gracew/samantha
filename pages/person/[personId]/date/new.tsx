@@ -11,12 +11,14 @@ export default function NewDate() {
   const router = useRouter();
   const { personId } = router.query;
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getPerson(personId as string).then(parsed => setName(parsed.name));
   });
 
   async function onNext() {
+    setLoading(true);
     const dateId = await addDate(personId as string, { date, time });
     router.push(`/person/${personId}/date/${dateId}/where`);
   }
@@ -24,7 +26,7 @@ export default function NewDate() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={date === "" || time === ""} backHref="/">
+        <Step onNext={onNext} nextDisabled={date === "" || time === ""} backHref="/" loading={loading}>
           <h2>
             When was your date with {name}?
           </h2>

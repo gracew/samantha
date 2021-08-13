@@ -79,16 +79,19 @@ export default function DateReflection() {
   const router = useRouter();
   const { personId, dateId } = router.query;
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getPerson(personId as string).then(p => setName(p!.name));
   });
 
   async function onNext() {
+    setLoading(true);
     await updateDate(dateId as string, { reflection: { [questions[step].id]: value } });
     if (step === questions.length - 1) {
       router.push(`/`);
     } else {
+      setLoading(false);
       setStep(step + 1);
       setValue("");
     }
@@ -97,7 +100,7 @@ export default function DateReflection() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={!questions[step].optional && value === ""} backHref="/">
+        <Step onNext={onNext} nextDisabled={!questions[step].optional && value === ""} backHref="/" loading={loading}>
           <h2>
             {questions[step].question(name as string)}
           </h2>

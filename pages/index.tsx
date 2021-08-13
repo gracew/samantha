@@ -1,21 +1,21 @@
 import { Button, Card, CardBody, CardHeader } from 'grommet';
 import { Add } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
-import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
+import CenteredSpinner from '../components/centeredSpinner';
 import { getPersons, Person } from '../store';
 import styles from '../styles/Home.module.css';
 import { formatDate } from './person/util';
 
 export default function Home() {
   const router = useRouter();
-  const [data, setData] = useState<Person[]>([]);
+  const [persons, setPersons] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     getPersons().then(parsed => {
-      setData(parsed);
+      setPersons(parsed);
       setLoading(false);
     });
   }, []);
@@ -27,19 +27,20 @@ export default function Home() {
           My Dates
         </h2>
 
-        <div className={styles.grid}>
-          {data.map(d =>
-            <Card className={styles.card} key={d.id} background="light-1">
-              <Button hoverIndicator onClick={() => router.push(`/person/${d.id}`)}>
+        {loading && <CenteredSpinner />}
+        {!loading && <div className={styles.grid}>
+          {persons.map(person =>
+            <Card className={styles.card} key={person.id} background="light-1">
+              <Button hoverIndicator onClick={() => router.push(`/person/${person.id}`)}>
                 <CardHeader
                   className={styles.cardHeader}
                   pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
                 >
-                  {d.name}
+                  {person.name}
                 </CardHeader>
                 <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
-                  <div>{d.dates.length} {d.dates.length === 1 ? "date" : "dates"}</div>
-                  <div>{formatDate(d.dates[0].date)}</div>
+                  <div>{person.dates.length} {person.dates.length === 1 ? "date" : "dates"}</div>
+                  {person.dates.length > 0 && <div>{formatDate(person.dates[0].date)}</div>}
                 </CardBody>
               </Button>
             </Card>
@@ -49,7 +50,7 @@ export default function Home() {
             <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push("/person/new/1")} />
           </Card>
 
-        </div>
+        </div>}
       </main>
 
     </div>
