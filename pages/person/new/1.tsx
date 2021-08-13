@@ -15,7 +15,7 @@ export default function NewPersonName() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={name === ""} backHref="/">
+        <Step label="Next" onNext={onNext} nextDisabled={name === ""} backHref="/">
           <h2>
             Who did you meet?
           </h2>

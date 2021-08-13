@@ -36,7 +36,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <SignedIn>
         <Grommet theme={customTheme}>
-          <Navbar />
           <Component {...pageProps} />
         </Grommet>
       </SignedIn>

@@ -30,6 +30,7 @@ export default function NewPersonContext() {
     <div className={styles.container}>
       <main className={styles.main}>
         <Step
+          label="Next"
           onNext={onNext}
           nextDisabled={context === "" || (context === Context.Other && other === "")}
           backHref={"/person/new/1"}

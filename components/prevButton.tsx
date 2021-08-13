@@ -7,7 +7,7 @@ interface PrevButtonProps {
 }
 
 export default function PrevButton(props: PrevButtonProps) {
-  return <div>
+  return <div style={{ marginRight: "10px", position: "relative", zIndex: 1 }}>
     <Link href={props.href}><Previous color="white"/></Link>
   </div>;
 }
