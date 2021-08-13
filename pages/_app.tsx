@@ -9,6 +9,7 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
+import Navbar from "../components/navbar";
 import '../styles/globals.css';
 const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
 
@@ -35,6 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <SignedIn>
         <Grommet theme={customTheme}>
+          <Navbar />
           <Component {...pageProps} />
         </Grommet>
       </SignedIn>
