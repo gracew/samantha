@@ -20,9 +20,9 @@ export const Step: FunctionComponent<StepProps> = (props) => {
     <div>
       <div className={styles.prevAndProgress}>
         <PrevButton href={props.backHref} />
-        <div className={styles.progressContainer}>
-          {props.progress && <Meter value={props.progress} />}
-        </div>
+        {props.progress && <div className={styles.progressContainer}>
+          <Meter value={props.progress} />
+        </div>}
       </div>
       {props.children}
       <div>
