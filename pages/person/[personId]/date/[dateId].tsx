@@ -2,6 +2,7 @@ import { Card, CardBody, CardHeader } from 'grommet';
 import { Clock } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
+import CenteredSpinner from '../../../../components/centeredSpinner';
 import PrevButton from '../../../../components/prevButton';
 import { getDate, getPerson, Person } from '../../../../store';
 import styles from '../../../../styles/Date.module.css';
@@ -24,10 +25,10 @@ export default function Date() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <PrevButton href="/" />
+        {!(person && date) && <CenteredSpinner />}
         {person && date &&
           <div>
-            <PrevButton href="/" />
-
             <h2>Date on {formatDate(date.date)} with {person.name}</h2>
             <div className={styles.grid}>
               <Card className={styles.iconCard} pad="medium" background="light-1"> <Clock />{date.time}</Card>

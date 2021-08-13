@@ -2,6 +2,7 @@ import { Button, Card, CardBody, CardHeader, Video } from 'grommet';
 import { Add, Bar, Brush, Cafeteria, Clock, Grow, Java, New, Phone } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
+import CenteredSpinner from '../../components/centeredSpinner';
 import PrevButton from '../../components/prevButton';
 import { getPerson } from '../../store';
 import styles from '../../styles/Home.module.css';
@@ -33,9 +34,14 @@ export default function Person() {
   const router = useRouter();
   const { personId } = router.query;
   const [person, setPerson] = useState<any>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getPerson(personId as string).then(person => setPerson(person));
+    setLoading(true);
+    getPerson(personId as string).then(person => {
+      setPerson(person);
+      setLoading(false);
+    });
   }, [personId]);
 
   return (
@@ -48,8 +54,9 @@ export default function Person() {
             <h2>
               My Dates with {person.name}
             </h2>
-            <div className={styles.grid}>
 
+            {loading && <CenteredSpinner />}
+            {!loading && <div className={styles.grid}>
               {person.dates.map((d: any) => <Card className={styles.card} key={d.id} background="light-1">
                 <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>
                   <CardHeader
@@ -68,7 +75,7 @@ export default function Person() {
               <Card className={styles.card} background="light-1">
                 <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={() => router.push(`/person/${personId}/date/new`)} />
               </Card>
-            </div>
+            </div>}
           </div>}
       </main>
 

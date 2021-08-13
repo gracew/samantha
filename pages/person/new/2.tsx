@@ -1,4 +1,4 @@
-import { RadioButtonGroup, TextInput } from 'grommet';
+import { RadioButtonGroup } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import OtherInput from '../../../components/otherInput';
@@ -19,15 +19,22 @@ export default function NewPersonContext() {
   const [other, setOther] = useState("");
   const router = useRouter();
   const { name } = router.query;
+  const [loading, setLoading] = useState(false);
 
   async function onNext() {
+    setLoading(true);
     const id = await addPerson({ name: name as string, context, context_other: other });
     router.push(`/person/${id}/date/new`);
   }
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={context === "" || (context === Context.Other && other === "")} backHref={"/person/new/1"}>
+        <Step
+          onNext={onNext}
+          nextDisabled={context === "" || (context === Context.Other && other === "")}
+          backHref={"/person/new/1"}
+          loading={loading}
+        >
           <h2>
             How did you meet {name}?
           </h2>

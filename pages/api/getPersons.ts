@@ -6,9 +6,11 @@ async function handler(
   req: RequireSessionProp<NextApiRequest>,
   res: NextApiResponse
 ) {
-  const query = `select p.id, p.name, json_agg(dates) as dates 
+  // https://stackoverflow.com/questions/24155190/postgresql-left-join-json-agg-ignore-remove-null
+  const query = `select p.id, p.name, 
+coalesce(json_agg(dates) filter (where dates.id is not null), '[]') as dates
 from persons p
-join dates on p.id = dates.person_id
+left join dates on p.id = dates.person_id
 where p.user_id = $1
 group by p.id`;
   const pgRes = await client.query(query, [req.session.userId]);

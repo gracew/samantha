@@ -21,8 +21,10 @@ export default function DateLocation() {
   const [other, setOther] = useState("");
   const router = useRouter();
   const { personId, dateId } = router.query;
+  const [loading, setLoading] = useState(false);
 
   async function onNext() {
+    setLoading(true);
     await updateDate(dateId as string, { location, location_other: other });
     router.push(`/person/${personId}/date/${dateId}/reflect`);
   }
@@ -30,7 +32,12 @@ export default function DateLocation() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <Step onNext={onNext} nextDisabled={location === "" || (location === Where.SomewhereElse && other === "")} backHref={"/"}>
+        <Step
+          onNext={onNext}
+          nextDisabled={location === "" || (location === Where.SomewhereElse && other === "")}
+          backHref={"/"}
+          loading={loading}
+        >
           <h2>
             Where did you meet for your date?
           </h2>
