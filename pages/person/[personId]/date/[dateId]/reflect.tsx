@@ -108,9 +108,6 @@ export default function DateReflection() {
     }
   }
 
-  console.log(step);
-  console.log(questions[step].id);
-  console.log(allValues[questions[step].id]);
   return (
     <div className={styles.container}>
       <main className={styles.main}>

@@ -5,6 +5,7 @@ import OtherInput from '../../../components/otherInput';
 import { Step } from '../../../components/step';
 import { addPerson } from '../../../store';
 import styles from '../../../styles/Form.module.css';
+import * as uuid from "uuid";
 
 export enum Context {
   Event = "Event",
@@ -26,7 +27,7 @@ export default function EditPerson() {
   async function onNext() {
     setLoading(true);
     await addPerson({ id: personId as string, name, context, context_other: other });
-    router.push(`/person/${personId}/date/new`);
+    router.push(`/person/${personId}/date/${uuid.v4()}/when`);
   }
 
   const stepComponent = step === 0

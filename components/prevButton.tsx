@@ -1,7 +1,6 @@
 import { Button } from 'grommet';
 import { Previous } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
-import Link from 'next/link';
 import React from 'react';
 
 interface PrevButtonProps {
