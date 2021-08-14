@@ -6,7 +6,8 @@ import PrevButton from './prevButton';
 interface StepProps {
   label: string;
   onNext: () => void;
-  backHref: string;
+  onBack?: () => void;
+  backHref?: string;
   nextDisabled: boolean;
   loading?: boolean;
   progress?: number;
@@ -19,7 +20,7 @@ export const Step: FunctionComponent<StepProps> = (props) => {
   return (
     <div>
       <div className={styles.prevAndProgress}>
-        <PrevButton href={props.backHref} />
+        <PrevButton onBack={props.onBack} href={props.backHref} />
         {props.progress && <div className={styles.progressContainer}>
           <Meter value={props.progress} />
         </div>}

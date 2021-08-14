@@ -15,13 +15,14 @@ async function handler(
     return;
   }
 
-  const query = "insert into dates(person_id, date, time) values ($1, $2, $3) returning id";
-  const pgRes = await client.query(query, [
+  const query = "insert into dates(id, person_id, date, time) values ($1, $2, $3, $4)";
+  await client.query(query, [
+    req.body.id,
     req.body.person_id,
     req.body.date,
     req.body.time,
   ]);
-  res.status(200).json(pgRes.rows);
+  res.status(200).end();
 }
 
 export default requireSession(handler);
