@@ -9,7 +9,6 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
-import Navbar from "../components/navbar";
 import '../styles/globals.css';
 const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
 
@@ -32,6 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Samantha | Dating Journal</title>
         <meta name="description" content="The only app that guides you to reflect on dates and gives you custom dating tips." />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/webclip.png" />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
 
       <SignedIn>
