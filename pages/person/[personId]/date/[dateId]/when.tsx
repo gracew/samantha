@@ -37,6 +37,12 @@ export default function NewDate() {
     router.push(`/person/${personId}/date/${dateId}/where`);
   }
 
+  function formatAndSetDate(date: string) {
+    // the input will be of the form '2021-08-12T21:48:43.425Z'
+    // use moment to get the date according to the local time zone
+    setCalendarDate(moment(date).format("YYYY-MM-DD"));
+  }
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -55,7 +61,7 @@ export default function NewDate() {
             format="mm/dd/yyyy"
             calendarProps={{ bounds: [moment().subtract(6, "months").format(), moment().format()] }}
             value={calendarDate}
-            onChange={({ value }) => setCalendarDate(value as string)}
+            onChange={({ value }) => formatAndSetDate(value as string)}
           />
 
           <h2>
