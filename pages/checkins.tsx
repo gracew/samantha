@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 export default function CheckIns(){
     return (
         <div>
-            <h1>Hello World</h1>
+            <h2>Check-Ins</h2>
         </div>
     )
 }
