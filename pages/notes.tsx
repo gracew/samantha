@@ -9,8 +9,7 @@ export default function Notes() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { emotion } = router.query;
-    console.log(emotion)
-
+    
     async function handleSubmit(e: any) {
         setLoading(true);
         await fetch("/api/addCheckin", {
