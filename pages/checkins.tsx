@@ -6,7 +6,7 @@ import PrevButton from '../components/prevButton';
 
 export default function CheckIns(){
     const router = useRouter();
-    const emotions = ["😀 Happy", "🤩 Excited", "😕 Unsure", "😐 Bored", "😬 Anxious", "😡 Angry","😣 Stressed", "😭 Sad"]
+    const emotions = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
     return (
         <div className={styles.container}>
             <main className={styles.main}>
@@ -14,8 +14,8 @@ export default function CheckIns(){
                 <h2>Check-Ins</h2>
                 <h1>How do you feel about dating?</h1>
                 <Grid className={styles.grid}>
-                    {emotions.map(emotion => 
-                    <Button label = {emotion} hoverIndicator onClick={() => router.push(`/notes?emotion=${emotion}`)}/>
+                    {Object.entries(emotions).map(([text,emoji]) =>
+                        <Button hoverIndicator onClick={() => router.push(`/notes?emotion=${text}`)}>{emoji}{text}</Button>
                     )}
                 </Grid>
 

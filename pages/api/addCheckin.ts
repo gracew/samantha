@@ -6,9 +6,8 @@ async function handler(
     req: RequireSessionProp<NextApiRequest>,
     res: NextApiResponse
   ) {
-    const query = "INSERT INTO checkins(id, user_id, emotion, notes) values ($1, $2, $3, $4)";
+    const query = "INSERT INTO checkins(user_id, emotion, notes) values ($1, $2, $3)";
     await client.query(query, [
-        req.body.id,
         req.session.userId,
         req.body.emotion,
         req.body.notes,
