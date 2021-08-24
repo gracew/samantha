@@ -12,10 +12,10 @@ export default function CheckIns(){
             <main className={styles.main}>
                 <PrevButton href="/"/>
                 <h2>Check-Ins</h2>
-                <h1>How do you feel about dating?</h1>
+                <div>How do you feel about dating?</div>
                 <Grid className={styles.grid}>
                     {Object.entries(emotions).map(([text,emoji]) =>
-                        <Button hoverIndicator onClick={() => router.push(`/notes?emotion=${text}`)}>{emoji}{text}</Button>
+                        <Button hoverIndicator onClick={() => router.push(`/notes?emotion=${text}`)}>{emoji} {text}</Button>
                     )}
                 </Grid>
 

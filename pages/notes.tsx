@@ -21,26 +21,26 @@ export default function Notes() {
         setLoading(false);
           router.push("/");
     }
+    const labelWithSpinner = loading
+    ? <div className={styles.buttonSpinner}>{"submit"} <Spinner color="white" size="xsmall" /></div>
+    : "submit";
 
     return(
         <div className={styles.container}>
             <main className={styles.main}>
                 <PrevButton href="/checkins"/>
                 <div>
-                    <h1>Additional Notes</h1>
+                    <h2>Additional Notes</h2>
                     <p>You have selected: {emotion}</p>
                 </div>
-                {loading && <Spinner/>}
-
-                {!loading && <div>
+                <div>
                 <TextInput
                     placeholder="type here"
                     value={text}
                     onChange={event => setText(event.target.value)}
                 />
-                <Button label = "submit" hoverIndicator onClick={handleSubmit}/>
+                <Button label={labelWithSpinner} hoverIndicator onClick={handleSubmit}/>
                 </div>
-                }
             </main>
         </div>
     )
