@@ -54,11 +54,9 @@ export default function Home() {
                 </Button>
               </Card>
             )}
-
             <Card className={styles.card} background="light-1">
               <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={onAddPerson} />
             </Card>
-
           </div>}
         </main>
       </div>
