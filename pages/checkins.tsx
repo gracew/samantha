@@ -1,7 +1,6 @@
 import styles from '../styles/Home.module.css';
 import { Grid, Button} from 'grommet';
 import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
 import PrevButton from '../components/prevButton';
 
 export default function CheckIns(){
@@ -15,7 +14,7 @@ export default function CheckIns(){
                 <div>How do you feel about dating?</div>
                 <Grid className={styles.grid}>
                     {Object.entries(emotions).map(([text,emoji]) =>
-                        <Button hoverIndicator onClick={() => router.push(`/notes?emotion=${text}`)}>{emoji} {text}</Button>
+                        <Button key={text} value={emoji} hoverIndicator onClick={() => router.push(`/notes?emotion=${text}`)}>{emoji} {text}</Button>
                     )}
                 </Grid>
 

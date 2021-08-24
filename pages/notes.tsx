@@ -1,6 +1,6 @@
 import { TextInput, Button, Spinner } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Home.module.css';
 import PrevButton from '../components/prevButton';
 
