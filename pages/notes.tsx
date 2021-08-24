@@ -1,4 +1,4 @@
-import { TextInput, Button, Spinner } from 'grommet';
+import { TextArea, Button, Spinner } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import styles from '../styles/Home.module.css';
@@ -9,7 +9,7 @@ export default function Notes() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { emotion } = router.query;
-    
+
     async function handleSubmit(e: any) {
         setLoading(true);
         await fetch("/api/addCheckin", {
@@ -33,7 +33,8 @@ export default function Notes() {
                     <p>You have selected: {emotion}</p>
                 </div>
                 <div>
-                <TextInput
+                <TextArea
+                    rows={6}
                     placeholder="type here"
                     value={text}
                     onChange={event => setText(event.target.value)}

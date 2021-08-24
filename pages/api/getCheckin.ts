@@ -7,6 +7,7 @@ async function handler(
     res: NextApiResponse
   ) {
       const query = `SELECT id, emotion, notes
+      FROM checkins
       WHERE user_id = $1 AND id = $2`
 
       const pgRes = await client.query(query, [req.session.userId, req.body.id]);
