@@ -10,6 +10,8 @@ export default function CheckIns() {
   const router = useRouter();
   const [checkins, setCheckins] = useState<Record<string, any>>({});
 
+  const emotionDict: Record<string,string> = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
+
   useEffect(() => {
     getCheckins().then((result: any[]) => {
       // result is of type list
@@ -25,7 +27,7 @@ export default function CheckIns() {
     const formattedDate = moment(date).format("YYYY-MM-DD");
     const checkin = checkins[formattedDate];
     return <div>
-      {checkin && checkin.emotion}
+      {checkin && emotionDict[checkin?.emotion]}
       {date.getDate()}
     </div>;
   }

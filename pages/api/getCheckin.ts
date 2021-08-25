@@ -6,7 +6,7 @@ async function handler(
     req: RequireSessionProp<NextApiRequest>,
     res: NextApiResponse
   ) {
-      const query = `SELECT id, emotion, notes
+      const query = `SELECT *
       FROM checkins
       WHERE user_id = $1 AND id = $2`
 

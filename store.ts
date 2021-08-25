@@ -41,6 +41,15 @@ export async function getDate(id: string) {
   return res.json();
 }
 
+export async function getCheckin(id: string) {
+  const res = await fetch("/api/getCheckin", {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  return res.json();
+}
+
 export async function getCheckins() {
   const res = await fetch("/api/getCheckins");
   return res.json();
