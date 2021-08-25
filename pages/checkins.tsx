@@ -1,23 +1,31 @@
 import styles from '../styles/Home.module.css';
-import { Grid, Button} from 'grommet';
+import { Calendar, Box } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import PrevButton from '../components/prevButton';
+import React, { useEffect, useState } from 'react';
+import { getCheckins, Person } from '../store';
 
 export default function CheckIns(){
     const router = useRouter();
-    const emotions = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
+    const [checkins, setCheckins] = useState<any>();
+
+    useEffect(() => {
+        getCheckins((result:any)=> {
+            setCheckins(result)
+        });
+      }, []);
     return (
         <div className={styles.container}>
             <main className={styles.main}>
-                <PrevButton href="/"/>
-                <h2>Check-Ins</h2>
-                <div>How do you feel about dating?</div>
-                <Grid className={styles.grid}>
-                    {Object.entries(emotions).map(([text,emoji]) =>
-                        <Button key={text} value={emoji} hoverIndicator onClick={() => router.push(`/notes?emotion=${text}`)}>{emoji} {text}</Button>
-                    )}
-                </Grid>
-
+            <PrevButton href="/checkins/new"/>
+            <Box pad="large" align="center">
+                <Calendar
+                    size="medium"
+                    date={(new Date()).toISOString()}
+                    onSelect={(date) => {}}
+                    onClick={() => router.push(`/`)}
+                />
+            </Box>
             </main>
         </div>
     )

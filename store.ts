@@ -41,6 +41,11 @@ export async function getDate(id: string) {
   return res.json();
 }
 
+export async function getCheckins() {
+  const res = await fetch("/api/getCheckins");
+  return res.json();
+}
+
 export async function addPerson(person: Partial<Person>) {
     await fetch("/api/addPerson", {
       method: 'post',
