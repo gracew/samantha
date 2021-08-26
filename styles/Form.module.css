@@ -32,3 +32,38 @@
 .descriptionText {
   color: white;
 }
+
+.questionsCard {
+  margin: 15px 0;
+  box-shadow: none !important;
+}
+
+.question {
+  padding: 3px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question div,
+.question div span,
+.question button {
+  display: flex;
+  align-items: center;
+}
+
+.questionType {
+  margin-right: 10px;
+}
+
+.confirmArchiveButton {
+  margin-top: 15px !important;
+}
+
+.newQuestionButton {
+  float: right;
+  padding: 10px !important;
+  border-radius: 50px !important;
+  display: flex !important;
+  align-items: center;
+}
