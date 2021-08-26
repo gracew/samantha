@@ -9,7 +9,7 @@ export default function Questions() {
   const router = useRouter();
   const [question, setQuestion] = useState("");
   const [type, setType] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   async function onNext() {
     setLoading(true);
