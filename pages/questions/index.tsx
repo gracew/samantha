@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { Box, Button, Card, Drop, List } from 'grommet';
 import { Add, Archive, TextAlignFull, UnorderedList } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
@@ -73,7 +74,7 @@ export default function Questions() {
         >
           <Box pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>
             <h3>Are you sure you want to archive this question?</h3>
-            <div>Archiving means you won't see this question when adding new dates, but we'll still keep your answers for previous dates!</div>
+            <div>Archiving means you won&apos;t see this question when adding new dates, but we&apos;ll still keep your answers for previous dates!</div>
             <ButtonWithSpinner
               className={styles.confirmArchiveButton}
               onClick={onArchive}
