@@ -6,16 +6,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ButtonWithSpinner } from '../../components/buttonWithSpinner';
 import CenteredSpinner from '../../components/centeredSpinner';
 import PrevButton from '../../components/prevButton';
-import { archiveQuestion, getQuestions } from '../../store';
+import { archiveQuestion, getQuestions, Question } from '../../store';
 import styles from '../../styles/Form.module.css';
 
 export default function Questions() {
   const ref = useRef();
   const router = useRouter();
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(false);
   const [openLayer, setOpenLayer] = useState(false);
-  const [idToArchive, setIdToArchive] = useState();
+  const [idToArchive, setIdToArchive] = useState<string>();
   const [archiveLoading, setArchiveLoading] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Questions() {
     });
   }, []);
 
-  function renderQuestion(q: any) {
+  function renderQuestion(q: Question) {
     return <div className={styles.question}>
       <div>
         <span className={styles.questionType}>{q.type === "multiple-choice" ? <UnorderedList size="20px" /> : <TextAlignFull size="20px" />}</span>
@@ -35,7 +35,7 @@ export default function Questions() {
       <Button
         plain
         onClick={() => { setOpenLayer(true); setIdToArchive(q.id) }}
-        children={({ hover }: any) => hover ? <Archive size="20px" color="#cb444a" /> : <Archive size="20px" />}
+        children={({ hover }: { hover: boolean }) => hover ? <Archive size="20px" color="#cb444a" /> : <Archive size="20px" />}
       />
     </div>;
   }
@@ -44,6 +44,7 @@ export default function Questions() {
     setArchiveLoading(true);
     await archiveQuestion(idToArchive!);
     setArchiveLoading(false);
+    setOpenLayer(false);
     getQuestions().then(setQuestions);
   }
 

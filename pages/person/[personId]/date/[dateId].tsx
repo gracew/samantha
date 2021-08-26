@@ -4,9 +4,9 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import CenteredSpinner from '../../../../components/centeredSpinner';
 import PrevButton from '../../../../components/prevButton';
-import { getDate, getPerson, Person } from '../../../../store';
-import styles from '../../../../styles/Date.module.css';
 import { formatDate } from '../../../../components/util';
+import { getDate, getPerson, getQuestions, Person, Question } from '../../../../store';
+import styles from '../../../../styles/Date.module.css';
 import { getIcon } from '../../[personId]';
 import { questions } from './[dateId]/reflect';
 
@@ -16,18 +16,28 @@ export default function Date() {
   const [date, setDate] = useState<any>();
   const { personId } = router.query;
   const [person, setPerson] = useState<Person>();
+  const [questionsLoading, setQuestionsLoading] = useState(true);
 
   useEffect(() => {
     getPerson(personId as string).then(p => setPerson(p));
     getDate(dateId as string).then(date => setDate(date));
+    // kepe the "notes" question last
+    getQuestions().then(res => {
+      res.forEach((custom: Question) => questions.splice(questions.length - 1, 0, {
+        id: custom.id,
+        question: (name: string) => custom.question,
+        options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
+      }));
+      setQuestionsLoading(false);
+    });
   }, [dateId, personId]);
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <PrevButton href={`/person/${personId}`} />
-        {!(person && date) && <CenteredSpinner />}
-        {person && date &&
+        {(!person || !date || questionsLoading) && <CenteredSpinner />}
+        {person && date && !questionsLoading &&
           <div>
             <h2>Date {formatDate(date.date, true)} with {person.name}</h2>
             <div className={styles.grid}>

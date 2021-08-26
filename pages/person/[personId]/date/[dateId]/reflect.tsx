@@ -2,10 +2,18 @@ import { RadioButtonGroup, TextArea } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Step } from '../../../../../components/step';
-import { getPerson, updateDate } from '../../../../../store';
+import { getPerson, getQuestions, Question, updateDate } from '../../../../../store';
 import styles from '../../../../../styles/Form.module.css';
 
-export const questions = [
+interface ReflectionQuestion {
+  id: string;
+  question: (name: string) => string;
+  description?: string;
+  options?: string[];
+  optional?: boolean;
+}
+
+export const questions: ReflectionQuestion[] = [
   {
     id: "comfort",
     question: (name: string) => `Did you feel comfortable around ${name}?`,
@@ -69,7 +77,7 @@ export const questions = [
   {
     id: "notes",
     question: (name: string) => `Thanks for reflecting on your date with ${name}!`,
-    description: "Notes",
+    description: "Is there anything else you want to make a note of?",
     optional: true,
   }
 ]
@@ -84,6 +92,12 @@ export default function DateReflection() {
 
   useEffect(() => {
     getPerson(personId as string).then(p => setName(p!.name));
+    // kepe the "notes" question last
+    getQuestions().then(res => res.forEach((custom: Question) => questions.splice(questions.length - 1, 0, {
+      id: custom.id,
+      question: (name: string) => custom.question,
+      options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
+    })));
   }, [personId]);
 
   async function onBack() {
@@ -122,6 +136,7 @@ export default function DateReflection() {
           <h2>
             {questions[step].question(name as string)}
           </h2>
+          {questions[step].description && <p className={styles.descriptionText}>{questions[step].description}</p>}
           {questions[step].options && <RadioButtonGroup
             className={styles.radioButtonGroup}
             name="date-question"
@@ -130,7 +145,6 @@ export default function DateReflection() {
             onChange={e => setValue(e.target.value)}
           />}
           {!questions[step].options && <div>
-            <p className={styles.descriptionText}>Is there anything else you want to make a note of?</p>
             <TextArea
               rows={6}
               value={value}

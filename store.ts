@@ -18,6 +18,12 @@ export interface Date {
   reflection?: any;
 }
 
+export interface Question {
+  id: string;
+  question: string;
+  type: string;
+}
+
 export async function getPersons() {
   const res = await fetch("/api/getPersons");
   return res.json();
