@@ -6,14 +6,16 @@ import styles from '../styles/MobileMenu.module.css';
 
 export default function MobileMenu() {
   const router = useRouter();
+  const datesColor = !router.pathname.startsWith("/questions") ? "#00897B" : undefined;
+  const questionsColor = router.pathname.startsWith("/questions") ? "#00897B" : undefined;
   return (
     <div className={styles.mobileMenu}>
-      <Footer pad="medium" justify="evenly">
+      <Footer pad="large" justify="evenly">
         <Button onClick={() => router.push("/")}>
-          <Edit />
+          <Edit color={datesColor} />
         </Button>
         <Button onClick={() => router.push("/questions")}>
-          <Help />
+          <Help color={questionsColor} />
         </Button>
       </Footer>
     </div>
