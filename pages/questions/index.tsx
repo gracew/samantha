@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import { Box, Button, Card, Layer, List } from 'grommet';
-import { Add, Archive, TextAlignFull, UnorderedList } from 'grommet-icons';
+import { Add, Archive, Close, TextAlignFull, UnorderedList } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ButtonWithSpinner } from '../../components/buttonWithSpinner';
@@ -71,7 +71,10 @@ export default function Questions() {
           onEsc={() => setOpenLayer(false)}
           target={ref.current}
         >
-          <Box pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>
+          <Box pad="large">
+            <Button onClick={() => setOpenLayer(false)}>
+              <Close style={{ float: "right" }} />
+            </Button>
             <h3>Are you sure you want to archive this question?</h3>
             <div>Archiving means you won&apos;t see this question when adding new dates, but we&apos;ll still keep your answers for previous dates!</div>
             <ButtonWithSpinner

@@ -7,6 +7,8 @@ import styles from '../styles/DesktopMenu.module.css';
 
 export default function DesktopMenu() {
   const router = useRouter();
+  const datesColor = !router.pathname.startsWith("/questions") ? "white" : "#99c1bc";
+  const questionsColor = router.pathname.startsWith("/questions") ? "white" : "#99c1bc";
   return (
     <Sidebar
       className={styles.desktopMenu}
@@ -22,11 +24,11 @@ export default function DesktopMenu() {
       }
     >
       <Nav gap="medium">
-        <Button onClick={() => router.push("/")}>
-          <Edit className={styles.inlineIcon} size="18px" color="white" />Dates
+        <Button onClick={() => router.push("/")} color={datesColor}>
+          <Edit className={styles.inlineIcon} size="18px" color={datesColor} />Dates
         </Button>
-        <Button onClick={() => router.push("/questions")}>
-          <Help className={styles.inlineIcon} size="18px" color="white" />Questions
+        <Button onClick={() => router.push("/questions")} color={questionsColor}>
+          <Help className={styles.inlineIcon} size="18px" color={questionsColor} />Questions
         </Button>
       </Nav>
     </Sidebar>
