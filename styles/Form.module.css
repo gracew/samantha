@@ -1,8 +1,14 @@
 .container {
-  min-height: 100vh;
   padding: 0 20px;
+  flex: 1;
   display: flex;
   background-color: #00897B;
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    padding: 0 50px;
+  }
 }
 
 .main {
@@ -31,4 +37,39 @@
 
 .descriptionText {
   color: white;
+}
+
+.questionsCard {
+  margin: 15px 0;
+  box-shadow: none !important;
+}
+
+.question {
+  padding: 3px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question div,
+.question div span,
+.question button {
+  display: flex;
+  align-items: center;
+}
+
+.questionType {
+  margin-right: 10px;
+}
+
+.confirmArchiveButton {
+  margin: 0 auto;
+}
+
+.newQuestionButton {
+  float: right;
+  padding: 10px !important;
+  border-radius: 50px !important;
+  display: flex !important;
+  align-items: center;
 }

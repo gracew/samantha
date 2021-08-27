@@ -1,6 +1,7 @@
-import { Button, Meter, Spinner } from 'grommet';
+import { Meter } from 'grommet';
 import React, { FunctionComponent } from 'react';
 import styles from '../styles/Step.module.css';
+import { ButtonWithSpinner } from './buttonWithSpinner';
 import PrevButton from './prevButton';
 
 interface StepProps {
@@ -14,9 +15,6 @@ interface StepProps {
 }
 
 export const Step: FunctionComponent<StepProps> = (props) => {
-  const labelWithSpinner = props.loading
-    ? <div className={styles.buttonSpinner}>{props.label} <Spinner color="white" size="xsmall" /></div>
-    : props.label;
   return (
     <div>
       <div className={styles.prevAndProgress}>
@@ -27,7 +25,14 @@ export const Step: FunctionComponent<StepProps> = (props) => {
       </div>
       {props.children}
       <div>
-        <Button className={styles.nextButton} disabled={props.nextDisabled} primary label={labelWithSpinner} onClick={props.onNext} />
+        <ButtonWithSpinner
+          className={styles.nextButton}
+          disabled={props.nextDisabled}
+          primary
+          loading={props.loading}
+          spinnerColor="white"
+          label={props.label}
+          onClick={props.onNext} />
       </div>
     </div>
   )

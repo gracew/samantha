@@ -1,3 +1,9 @@
+@media only screen and (min-width: 600px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
 .navbar {
   padding: 10px 20px;
   background-color: #00897B;
@@ -7,16 +13,6 @@
 .logoName {
   font-weight: bold;
   margin-right: 8px;
-}
-
-.logoDesc {
-  display: none;
-}
-
-@media only screen and (min-width: 500px) {
-  .logoDesc {
-    display: inline;
-  }
 }
 
 .navbarRight {

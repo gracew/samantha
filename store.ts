@@ -26,6 +26,12 @@ export interface Checkin {
   user_id: string;
 }
 
+export interface Question {
+  id: string;
+  question: string;
+  type: string;
+}
+
 export async function getPersons() {
   const res = await fetch("/api/getPersons");
   return res.json();
@@ -85,4 +91,25 @@ export async function updateDate(id: string, metadata: Partial<Date>) {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ id, ...metadata }),
     });
+}
+
+export async function getQuestions() {
+  const res = await fetch("/api/getQuestions");
+  return res.json();
+}
+
+export async function addQuestion(question: string, type: string) {
+  await fetch("/api/addQuestion", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ question, type }),
+  });
+}
+
+export async function archiveQuestion(id: string) {
+  await fetch("/api/archiveQuestion", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id }),
+  });
 }

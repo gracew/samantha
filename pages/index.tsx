@@ -4,7 +4,7 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import * as uuid from "uuid";
 import CenteredSpinner from '../components/centeredSpinner';
-import Navbar from '../components/navbar';
+import MobileNavbar from '../components/mobileNavbar';
 import { formatDate } from '../components/util';
 import { getPersons, Person } from '../store';
 import styles from '../styles/Home.module.css';
@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div>
 
-      <Navbar />
+      <MobileNavbar />
       <div className={styles.container}>
         <main className={styles.main}>
           <h2>
