@@ -22,10 +22,10 @@ export default function Date() {
   useEffect(() => {
     getPerson(personId as string).then(p => setPerson(p));
     getDate(dateId as string).then(date => setDate(date));
-    // kepe the "notes" question last
     getQuestions().then(customQuestions => {
       setQuestions(
         [
+          // keep the "notes" question last
           ...baseQuestions.slice(0, baseQuestions.length - 1),
           ...customQuestions.map((custom: Question) => ({
             id: custom.id,

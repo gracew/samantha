@@ -93,10 +93,10 @@ export default function DateReflection() {
 
   useEffect(() => {
     getPerson(personId as string).then(p => setName(p!.name));
-    // keep the "notes" question last
     getQuestions().then(customQuestions =>
       setQuestions(
         [
+          // keep the "notes" question last
           ...baseQuestions.slice(0, baseQuestions.length - 1),
           ...customQuestions.map((custom: Question) => ({
             id: custom.id,
