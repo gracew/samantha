@@ -74,6 +74,7 @@ export default function Questions() {
             <h3>Are you sure you want to archive this question?</h3>
             <div>Archiving means you won&apos;t see this question when adding new dates, but we&apos;ll still keep your answers for previous dates!</div>
             <ButtonWithSpinner
+              margin={{ top: "small" }}
               className={styles.confirmArchiveButton}
               onClick={onArchive}
               label={`Archive "${questions.find(q => q.id === idToArchive)?.question}"`}

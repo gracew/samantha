@@ -13,7 +13,7 @@ interface ReflectionQuestion {
   optional?: boolean;
 }
 
-export const questions: ReflectionQuestion[] = [
+export const baseQuestions: ReflectionQuestion[] = [
   {
     id: "comfort",
     question: (name: string) => `Did you feel comfortable around ${name}?`,
@@ -89,15 +89,17 @@ export default function DateReflection() {
   const { personId, dateId } = router.query;
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [questions, setQuestions] = useState(baseQuestions);
 
   useEffect(() => {
     getPerson(personId as string).then(p => setName(p!.name));
-    // kepe the "notes" question last
-    getQuestions().then(res => res.forEach((custom: Question) => questions.splice(questions.length - 1, 0, {
-      id: custom.id,
-      question: (name: string) => custom.question,
-      options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
-    })));
+    // keep the "notes" question last
+    getQuestions().then(customQuestions =>
+      setQuestions(baseQuestions.splice(questions.length - 1, 0, customQuestions.map((custom: Question) => ({
+        id: custom.id,
+        question: (name: string) => custom.question,
+        options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
+      })))));
   }, [personId]);
 
   async function onBack() {

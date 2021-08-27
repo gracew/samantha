@@ -1,6 +1,6 @@
 import { UserButton } from '@clerk/clerk-react';
 import { Button, Nav, Sidebar } from 'grommet';
-import { Edit, Help, Send, StatusGood } from 'grommet-icons';
+import { Edit, Help, Send } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styles from '../styles/DesktopMenu.module.css';
@@ -24,9 +24,6 @@ export default function DesktopMenu() {
       <Nav gap="medium">
         <Button onClick={() => router.push("/")}>
           <Edit className={styles.inlineIcon} size="18px" color="white" />Dates
-        </Button>
-        <Button onClick={() => router.push("/checkins")}>
-          <StatusGood className={styles.inlineIcon} size="18px" color="white" />Check-ins
         </Button>
         <Button onClick={() => router.push("/questions")}>
           <Help className={styles.inlineIcon} size="18px" color="white" />Questions

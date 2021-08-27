@@ -11,9 +11,5 @@ export const ButtonWithSpinner: FunctionComponent<ButtonWithSpinnerProps> = (pro
   const labelWithSpinner = props.loading
     ? <div className={styles.buttonSpinner}>{props.label} <Spinner color={props.spinnerColor} size="xsmall" /></div>
     : props.label;
-  return (
-    <div>
-      <Button {...props} label={labelWithSpinner} />
-    </div>
-  )
+  return <Button {...props} label={labelWithSpinner} />;
 }

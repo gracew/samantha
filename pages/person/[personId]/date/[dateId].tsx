@@ -8,7 +8,7 @@ import { formatDate } from '../../../../components/util';
 import { getDate, getPerson, getQuestions, Person, Question } from '../../../../store';
 import styles from '../../../../styles/Date.module.css';
 import { getIcon } from '../../[personId]';
-import { questions } from './[dateId]/reflect';
+import { baseQuestions } from './[dateId]/reflect';
 
 export default function Date() {
   const router = useRouter();
@@ -17,17 +17,18 @@ export default function Date() {
   const { personId } = router.query;
   const [person, setPerson] = useState<Person>();
   const [questionsLoading, setQuestionsLoading] = useState(true);
+  const [questions, setQuestions] = useState(baseQuestions);
 
   useEffect(() => {
     getPerson(personId as string).then(p => setPerson(p));
     getDate(dateId as string).then(date => setDate(date));
     // kepe the "notes" question last
-    getQuestions().then(res => {
-      res.forEach((custom: Question) => questions.splice(questions.length - 1, 0, {
+    getQuestions().then(customQuestions => {
+      setQuestions(baseQuestions.splice(questions.length - 1, 0, customQuestions.map((custom: Question) => ({
         id: custom.id,
         question: (name: string) => custom.question,
         options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
-      }));
+      }))));
       setQuestionsLoading(false);
     });
   }, [dateId, personId]);
