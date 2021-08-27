@@ -21,9 +21,13 @@ export default function CheckIns(){
         <div className={styles.container}>
             <main className={styles.main}>
                 <PrevButton href="/checkins"/>
+                
+                <div className={styles.center1}> 
                 {moment(checkin?.created_at).format("ddd, MMMM DD, hh:mm A")}
-                <div>{emotionDict[checkin?.emotion]}</div>
-                <div>{checkin?.notes}</div>
+                </div>
+                <div className={styles.center2}>{emotionDict[checkin?.emotion]}</div>
+                <div className={styles.center1}>{checkin?.emotion}</div>
+                <div className={styles.center3}>{checkin?.notes}</div>
             </main>
         </div>
     )
