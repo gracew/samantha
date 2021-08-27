@@ -95,11 +95,16 @@ export default function DateReflection() {
     getPerson(personId as string).then(p => setName(p!.name));
     // keep the "notes" question last
     getQuestions().then(customQuestions =>
-      setQuestions(baseQuestions.splice(questions.length - 1, 0, customQuestions.map((custom: Question) => ({
-        id: custom.id,
-        question: (name: string) => custom.question,
-        options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
-      })))));
+      setQuestions(
+        [
+          ...baseQuestions.slice(0, baseQuestions.length - 1),
+          ...customQuestions.map((custom: Question) => ({
+            id: custom.id,
+            question: (name: string) => custom.question,
+            options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
+          })),
+          baseQuestions[baseQuestions.length - 1],
+        ]));
   }, [personId]);
 
   async function onBack() {

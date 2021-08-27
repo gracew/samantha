@@ -34,6 +34,7 @@ export default function Questions() {
       </div>
       <Button
         plain
+        margin="xsmall"
         onClick={() => { setOpenLayer(true); setIdToArchive(q.id) }}
         children={({ hover }: { hover: boolean }) => hover ? <Archive size="20px" color="#cb444a" /> : <Archive size="20px" />}
       />

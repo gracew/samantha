@@ -1,5 +1,5 @@
 import { Button, Footer } from 'grommet';
-import { Configure, Edit } from 'grommet-icons';
+import { Edit, Help } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styles from '../styles/MobileMenu.module.css';
@@ -13,7 +13,7 @@ export default function MobileMenu() {
           <Edit />
         </Button>
         <Button onClick={() => router.push("/questions")}>
-          <Configure />
+          <Help />
         </Button>
       </Footer>
     </div>
