@@ -9,10 +9,9 @@ import { emotionDict } from '../checkins';
 
 export default function ViewCheckin(){
     const router = useRouter();
-    const { checkinId } = router.query;
-
     const [checkin, setCheckin] = useState<Checkin>();
     useEffect(() => {
+        const { checkinId } = router.query;
         getCheckin(checkinId as string).then(result => setCheckin(result));
       }, []);
     return (
