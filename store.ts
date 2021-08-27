@@ -18,6 +18,14 @@ export interface Date {
   reflection?: any;
 }
 
+export interface Checkin {
+  created_at: string;
+  emotion: string;
+  id: string;
+  notes: string;
+  user_id: string;
+}
+
 export async function getPersons() {
   const res = await fetch("/api/getPersons");
   return res.json();

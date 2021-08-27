@@ -82,18 +82,18 @@
   font-family: NimbusSansExd, sans-serif;
   font-weight: bold;
 }
-.center1 {
+.centerEmotion {
   text-align: center;
   font-size: 30px;
   padding: 10px;
  }
- .center2 {
+ .centerEmoji {
   text-align: center;
   font-size: 40px;
   padding: 10px;
  }
 
- .center3 {
+ .centerNotes {
   text-align: center;
   font-size: 20px;
   padding: 20px;

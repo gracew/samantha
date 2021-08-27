@@ -1,19 +1,17 @@
 import styles from '../../styles/Home.module.css';
-import { } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import PrevButton from '../../components/prevButton';
 import React, { useEffect, useState } from 'react';
-import { getCheckin } from '../../store';
+import { Checkin, getCheckin } from '../../store';
 import moment from 'moment';
+import { emotionDict } from '../checkins';
 
 
-export default function CheckIns(){
+export default function ViewCheckin(){
     const router = useRouter();
     const { checkinId } = router.query;
 
-    const emotionDict: Record<string,string> = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
-
-    const [checkin, setCheckin] = useState<any>();
+    const [checkin, setCheckin] = useState<Checkin>();
     useEffect(() => {
         getCheckin(checkinId as string).then(result => setCheckin(result));
       }, []);
@@ -25,9 +23,9 @@ export default function CheckIns(){
                 <div className={styles.center1}> 
                 {moment(checkin?.created_at).format("ddd, MMMM DD, hh:mm A")}
                 </div>
-                <div className={styles.center2}>{emotionDict[checkin?.emotion]}</div>
-                <div className={styles.center1}>{checkin?.emotion}</div>
-                <div className={styles.center3}>{checkin?.notes}</div>
+                <div className={styles.centerEmoji}>{emotionDict[checkin?.emotion]}</div>
+                <div className={styles.centerEmotion}>{checkin?.emotion}</div>
+                <div className={styles.centerNotes}>{checkin?.notes}</div>
             </main>
         </div>
     )

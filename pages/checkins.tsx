@@ -3,18 +3,19 @@ import { Calendar, Box, Button } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import PrevButton from '../components/prevButton';
 import React, { useEffect, useState } from 'react';
-import { getCheckins, Person } from '../store';
+import { Checkin, getCheckins, Person } from '../store';
 import moment from 'moment';
+
+export const emotionDict: Record<string,string> = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
 
 export default function CheckIns() {
   const router = useRouter();
   const [checkins, setCheckins] = useState<Record<string, any>>({});
 
-  const emotionDict: Record<string,string> = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
-
   useEffect(() => {
-    getCheckins().then((result: any[]) => {
+    getCheckins().then((result: Checkin[]) => {
       // result is of type list
+      console.log(result)
       const resultMap: Record<string, any> = {};
       result.forEach(c => {
         resultMap[moment(c.created_at).format("YYYY-MM-DD")] = c;
@@ -26,8 +27,9 @@ export default function CheckIns() {
   function renderDate({ date }: { date: Date }) {
     const formattedDate = moment(date).format("YYYY-MM-DD");
     const checkin = checkins[formattedDate];
-    return <div>
+    return <div className={styles.leftAlign}>
       {checkin && emotionDict[checkin?.emotion]}
+      <br/>
       {date.getDate()}
     </div>;
   }

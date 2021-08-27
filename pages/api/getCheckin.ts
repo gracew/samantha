@@ -8,9 +8,9 @@ async function handler(
   ) {
       const query = `SELECT *
       FROM checkins
-      WHERE user_id = $1 AND id = $2`
+      WHERE user_id = $2 AND id = $1`
 
-      const pgRes = await client.query(query, [req.session.userId, req.body.id]);
+      const pgRes = await client.query(query, [req.body.id, req.session.userId]);
       res.status(200).json(pgRes.rows.length > 0 ? pgRes.rows[0] : undefined);
   }
   
