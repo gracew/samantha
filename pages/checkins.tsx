@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import styles from '../styles/Home.module.css';
 import { Calendar, Box, Button } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
