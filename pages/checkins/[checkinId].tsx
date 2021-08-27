@@ -23,7 +23,7 @@ export default function ViewCheckin(){
                 <div className={styles.center1}> 
                 {moment(checkin?.created_at).format("ddd, MMMM DD, hh:mm A")}
                 </div>
-                <div className={styles.centerEmoji}>{emotionDict[checkin?.emotion]}</div>
+                <div className={styles.centerEmoji}>{emotionDict[checkin?.emotion!]}</div>
                 <div className={styles.centerEmotion}>{checkin?.emotion}</div>
                 <div className={styles.centerNotes}>{checkin?.notes}</div>
             </main>
