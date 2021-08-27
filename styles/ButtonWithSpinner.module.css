@@ -1,0 +1,10 @@
+.buttonSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonSpinner div {
+  margin-left: 10px;
+  display: inline-block;
+}
