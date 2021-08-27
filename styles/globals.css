@@ -4,6 +4,27 @@ body {
   margin: 0;
   font-family: NimbusSansExd, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#__next,
+.grommet-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+@media only screen and (max-width: 599px) {
+  .grommet-wrapper {
+    flex-direction: column;
+  }
+}
+
+.grommet-wrapper > div:nth-child(2) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 a {

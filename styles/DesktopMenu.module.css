@@ -1,0 +1,23 @@
+@media only screen and (max-width: 599px) {
+  .desktopMenu {
+    display: none !important;
+  }
+}
+
+.desktopMenu {
+  background-color: #197369;
+  color: white;
+  width: 300px;
+  font-weight: bold;
+}
+
+.inlineIcon {
+  position: relative;
+  top: 2px;
+  margin-right: 8px;
+}
+
+.footerAccount > div {
+  display: inline-block !important;
+  margin-right: 8px;
+}

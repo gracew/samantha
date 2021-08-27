@@ -7,7 +7,7 @@ import { addDate, getDate, getPerson, updateDate } from '../../../../../store';
 import styles from '../../../../../styles/Form.module.css';
 
 export default function NewDate() {
-  const [calendarDate, setCalendarDate] = useState((new Date()).toISOString());
+  const [calendarDate, setCalendarDate] = useState((moment().format("YYYY-MM-DD")));
   const [time, setTime] = useState("");
   const router = useRouter();
   const { personId, dateId } = router.query;

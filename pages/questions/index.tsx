@@ -1,21 +1,21 @@
 /* eslint-disable react/no-children-prop */
-import { Box, Button, Card, Drop, List } from 'grommet';
+import { Box, Button, Card, Layer, List } from 'grommet';
 import { Add, Archive, TextAlignFull, UnorderedList } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ButtonWithSpinner } from '../../components/buttonWithSpinner';
 import CenteredSpinner from '../../components/centeredSpinner';
 import PrevButton from '../../components/prevButton';
-import { archiveQuestion, getQuestions } from '../../store';
+import { archiveQuestion, getQuestions, Question } from '../../store';
 import styles from '../../styles/Form.module.css';
 
 export default function Questions() {
   const ref = useRef();
   const router = useRouter();
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(false);
-  const [openDrop, setOpenDrop] = useState(false);
-  const [idToArchive, setIdToArchive] = useState();
+  const [openLayer, setOpenLayer] = useState(false);
+  const [idToArchive, setIdToArchive] = useState<string>();
   const [archiveLoading, setArchiveLoading] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Questions() {
     });
   }, []);
 
-  function renderQuestion(q: any) {
+  function renderQuestion(q: Question) {
     return <div className={styles.question}>
       <div>
         <span className={styles.questionType}>{q.type === "multiple-choice" ? <UnorderedList size="20px" /> : <TextAlignFull size="20px" />}</span>
@@ -34,8 +34,9 @@ export default function Questions() {
       </div>
       <Button
         plain
-        onClick={() => { setOpenDrop(true); setIdToArchive(q.id) }}
-        children={({ hover }: any) => hover ? <Archive size="20px" color="#cb444a" /> : <Archive size="20px" />}
+        margin="xsmall"
+        onClick={() => { setOpenLayer(true); setIdToArchive(q.id) }}
+        children={({ hover }: { hover: boolean }) => hover ? <Archive size="20px" color="#cb444a" /> : <Archive size="20px" />}
       />
     </div>;
   }
@@ -44,11 +45,12 @@ export default function Questions() {
     setArchiveLoading(true);
     await archiveQuestion(idToArchive!);
     setArchiveLoading(false);
+    setOpenLayer(false);
     getQuestions().then(setQuestions);
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={ref as any}>
       <main className={styles.main}
       >
         <PrevButton href="/" />
@@ -60,29 +62,27 @@ export default function Questions() {
         {loading && <CenteredSpinner />}
         {!loading && <Card background="light-1" className={styles.questionsCard}>
           <List
-            ref={ref as any}
             data={questions}
             children={renderQuestion}
           />
         </Card>}
-        {openDrop && <Drop
-          stretch="align"
-          round={true}
+        {openLayer && <Layer
+          onClickOutside={() => setOpenLayer(false)}
+          onEsc={() => setOpenLayer(false)}
           target={ref.current}
-          onClickOutside={() => setOpenDrop(false)}
-          onEsc={() => setOpenDrop(false)}
         >
           <Box pad={{ horizontal: "medium", top: "small", bottom: "medium" }}>
             <h3>Are you sure you want to archive this question?</h3>
             <div>Archiving means you won&apos;t see this question when adding new dates, but we&apos;ll still keep your answers for previous dates!</div>
             <ButtonWithSpinner
+              margin={{ top: "small" }}
               className={styles.confirmArchiveButton}
               onClick={onArchive}
               label={`Archive "${questions.find(q => q.id === idToArchive)?.question}"`}
               loading={archiveLoading}
             />
           </Box>
-        </Drop>}
+        </Layer>}
         <Button className={styles.newQuestionButton} onClick={() => router.push("/questions/new")} label={<Add />} primary color="white" />
       </main>
     </div >
