@@ -9,7 +9,7 @@ import moment from 'moment';
 
 export const emotionDict: Record<string,string> = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
 
-export default function CheckIns() {
+export default function Checkins() {
   const router = useRouter();
   const [checkins, setCheckins] = useState<Record<string, any>>({});
 
