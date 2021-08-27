@@ -18,6 +18,14 @@ export interface Date {
   reflection?: any;
 }
 
+export interface Checkin {
+  created_at: string;
+  emotion: string;
+  id: string;
+  notes: string;
+  user_id: string;
+}
+
 export interface Question {
   id: string;
   question: string;
@@ -44,6 +52,20 @@ export async function getDate(id: string) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ id }),
   });
+  return res.json();
+}
+
+export async function getCheckin(id: string) {
+  const res = await fetch("/api/getCheckin", {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  return res.json();
+}
+
+export async function getCheckins() {
+  const res = await fetch("/api/getCheckins");
   return res.json();
 }
 
