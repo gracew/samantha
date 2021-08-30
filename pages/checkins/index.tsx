@@ -1,13 +1,22 @@
 /* eslint-disable react/no-children-prop */
-import styles from '../styles/Home.module.css';
-import { Calendar, Box, Button } from 'grommet';
-import { useRouter } from 'next/dist/client/router';
-import PrevButton from '../components/prevButton';
-import React, { useEffect, useState } from 'react';
-import { Checkin, getCheckins, Person } from '../store';
+import { Box, Button, Calendar } from 'grommet';
 import moment from 'moment';
+import { useRouter } from 'next/dist/client/router';
+import React, { useEffect, useState } from 'react';
+import PrevButton from '../../components/prevButton';
+import { Checkin, getCheckins } from '../../store';
+import styles from '../../styles/Form.module.css';
 
-export const emotionDict: Record<string,string> = {Happy: '😀', Excited: '🤩', Unsure: '😕', Bored: '😐', Anxious: '😬', Angry: '😡', Stressed: '😣', Sad: '😭'}
+export const emotionDict: Record<string, string> = {
+  Happy: '😀',
+  Excited: '🤩',
+  Unsure: '😕',
+  Bored: '😐',
+  Anxious: '😬',
+  Angry: '😤',
+  Stressed: '😣',
+  Sad: '😞',
+}
 
 export default function Checkins() {
   const router = useRouter();
@@ -15,8 +24,6 @@ export default function Checkins() {
 
   useEffect(() => {
     getCheckins().then((result: Checkin[]) => {
-      // result is of type list
-      console.log(result)
       const resultMap: Record<string, any> = {};
       result.forEach(c => {
         resultMap[moment(c.created_at).format("YYYY-MM-DD")] = c;
@@ -28,14 +35,22 @@ export default function Checkins() {
   function renderDate({ date }: { date: Date }) {
     const formattedDate = moment(date).format("YYYY-MM-DD");
     const checkin = checkins[formattedDate];
-    return <div className={styles.leftAlign}>
-      {checkin && emotionDict[checkin?.emotion]}
-      <br/>
-      {date.getDate()}
-    </div>;
+    if (!checkin) {
+      return <div className={styles.calendarDate}>
+        <div>
+          {date.getDate()}
+        </div>
+      </div>;
+    }
+    return <Button hoverIndicator onClick={() => onSelect(date)}>
+      <div className={styles.calendarDate}>
+        <div>{checkin && emotionDict[checkin?.emotion]}</div>
+        <div>{date.getDate()}</div>
+      </div>
+    </Button>;
   }
 
-  function onSelect(date: string | string[]) {
+  function onSelect(date: Date) {
     const formattedDate = moment(date).format("YYYY-MM-DD");
     const checkin = checkins[formattedDate];
     if (checkin) {
@@ -47,11 +62,10 @@ export default function Checkins() {
     <div className={styles.container}>
       <main className={styles.main}>
         <PrevButton href="/checkins/new" />
-        <Box pad="large" align="center">
-          <Calendar
-            size="medium"
+        <h2>Check-Ins</h2>
+        <Box align="center">
+          <Calendar className={styles.checkinCalendar}
             date={(new Date()).toISOString()}
-            onSelect={onSelect}
             children={renderDate}
           />
         </Box>
