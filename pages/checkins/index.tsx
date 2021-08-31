@@ -8,8 +8,9 @@ import { Checkin, getCheckins } from '../../store';
 import styles from '../../styles/Form.module.css';
 
 export const emotionDict: Record<string, string> = {
-  Happy: '😀',
-  Excited: '🤩',
+  Happy: '😊',
+  Excited: '😀',
+  Inspired: '🤩',
   Unsure: '😕',
   Bored: '😐',
   Anxious: '😬',
