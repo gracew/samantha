@@ -124,7 +124,7 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 60px;
-  width: 48px;
+  width: 46px;
   padding-top: 10px;
 }
 
@@ -143,14 +143,13 @@
   text-align: center;
   font-size: 40px;
   line-height: 40px;
-  margin-top: 15px;
+  margin: 15px 0 10px 0;
 }
 
 .centerEmotion {
   text-align: center;
   color: white;
   font-size: 30px;
-  padding: 10px;
 }
 
 .centerNotes {

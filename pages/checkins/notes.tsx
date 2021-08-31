@@ -25,23 +25,21 @@ export default function Notes() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <div>
-          <Step
-            label="Submit"
-            onNext={handleSubmit}
-            backHref="/checkins/new"
-            loading={loading}
-            nextDisabled={false}
-          >
-            <h2>{emotionDict[emotion as string]} {emotion}</h2>
-            <TextArea
-              rows={6}
-              placeholder="Add a note..."
-              value={text}
-              onChange={event => setText(event.target.value)}
-            />
-          </Step>
-        </div>
+        <Step
+          label="Done"
+          onNext={handleSubmit}
+          backHref="/checkins/new"
+          loading={loading}
+          nextDisabled={false}
+        >
+          <h2>{emotionDict[emotion as string]} {emotion}</h2>
+          <TextArea
+            rows={6}
+            placeholder="Add a note..."
+            value={text}
+            onChange={event => setText(event.target.value)}
+          />
+        </Step>
       </main>
     </div>
   )
