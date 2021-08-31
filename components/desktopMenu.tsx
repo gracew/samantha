@@ -1,14 +1,17 @@
 import { UserButton } from '@clerk/clerk-react';
 import { Button, Nav, Sidebar } from 'grommet';
-import { Edit, Help, Send } from 'grommet-icons';
+import { Edit, Help, Send, StatusGood } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styles from '../styles/DesktopMenu.module.css';
 
 export default function DesktopMenu() {
   const router = useRouter();
-  const datesColor = !router.pathname.startsWith("/questions") ? "white" : "#99c1bc";
-  const questionsColor = router.pathname.startsWith("/questions") ? "white" : "#99c1bc";
+  const checkins = router.pathname.startsWith("/checkins");
+  const questions = router.pathname.startsWith("/questions");
+  const checkinsColor = checkins ? "white" : "#99c1bc";
+  const questionsColor = questions ? "white" : "#99c1bc";
+  const datesColor = !checkins && !questions ? "white" : "#99c1bc";
   return (
     <Sidebar
       className={styles.desktopMenu}
@@ -26,6 +29,9 @@ export default function DesktopMenu() {
       <Nav gap="medium">
         <Button onClick={() => router.push("/")} color={datesColor}>
           <Edit className={styles.inlineIcon} size="18px" color={datesColor} />Dates
+        </Button>
+        <Button onClick={() => router.push("/checkins/new")} color={checkinsColor}>
+          <StatusGood className={styles.inlineIcon} size="18px" color={checkinsColor} />Check-ins
         </Button>
         <Button onClick={() => router.push("/questions")} color={questionsColor}>
           <Help className={styles.inlineIcon} size="18px" color={questionsColor} />Questions

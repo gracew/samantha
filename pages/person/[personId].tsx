@@ -69,37 +69,35 @@ export default function Person() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <div>
-          <PrevButton href="/" />
+        <PrevButton href="/" />
 
-          {!person && <CenteredSpinner />}
-          {person && <div>
-            <h2>
-              My Dates with {person.name}
-            </h2>
-            <p>You met {person.name} through {getContext(person)} {getContextEmoji(person.context)}</p>
-            <div className={styles.grid}>
-              {person.dates.map((d: any) => <Card className={styles.card} key={d.id} background="light-1">
-                <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>
-                  <CardHeader
-                    className={styles.cardHeader}
-                    pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
-                  >
-                    {formatDate(d.date)}
-                  </CardHeader>
-                  <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
-                    <div className={styles.inlineIcon}><Clock />{d.time}</div>
-                    <div className={styles.inlineIcon}>{getIcon(d.location)}{d.location}</div>
-                  </CardBody>
-                </Button>
-              </Card>)}
+        {!person && <CenteredSpinner />}
+        {person && <div>
+          <h2>
+            My Dates with {person.name}
+          </h2>
+          <p>You met {person.name} through {getContext(person)} {getContextEmoji(person.context)}</p>
+          <div className={styles.grid}>
+            {person.dates.map((d: any) => <Card className={styles.card} key={d.id} background="light-1">
+              <Button hoverIndicator onClick={() => router.push(`/person/${personId}/date/${d.id}`)}>
+                <CardHeader
+                  className={styles.cardHeader}
+                  pad={{ top: "large", left: "large", right: "large", bottom: "small" }}
+                >
+                  {formatDate(d.date)}
+                </CardHeader>
+                <CardBody pad={{ left: "large", bottom: "large", right: "large", top: "small" }}>
+                  <div className={styles.inlineIcon}><Clock />{d.time}</div>
+                  <div className={styles.inlineIcon}>{getIcon(d.location)}{d.location}</div>
+                </CardBody>
+              </Button>
+            </Card>)}
 
-              <Card className={styles.card} background="light-1">
-                <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={onAddDate} />
-              </Card>
-            </div>
-          </div>}
-        </div>
+            <Card className={styles.card} background="light-1">
+              <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={onAddDate} />
+            </Card>
+          </div>
+        </div>}
       </main>
 
     </div>
