@@ -21,17 +21,23 @@ export default function Date() {
 
   useEffect(() => {
     getPerson(personId as string).then(p => setPerson(p));
-    getDate(dateId as string).then(date => setDate(date));
-    getQuestions().then(customQuestions => {
+    Promise.all([
+      getDate(dateId as string),
+      getQuestions(true),
+    ]).then(([date, customQuestions]) => {
+      setDate(date);
       setQuestions(
         [
           // keep the "notes" question last
           ...baseQuestions.slice(0, baseQuestions.length - 1),
-          ...customQuestions.map((custom: Question) => ({
-            id: custom.id,
-            question: (name: string) => custom.question,
-            options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
-          })),
+          ...customQuestions
+            // only include the questions that have a responose for this date
+            .filter((custom: Question) => date.reflection[custom.id])
+            .map((custom: Question) => ({
+              id: custom.id,
+              question: (name: string) => custom.question,
+              options: custom.type === "multiple-choice" ? ["Yes", "Somewhat", "No", "Not sure"] : undefined,
+            })),
           baseQuestions[baseQuestions.length - 1],
         ]);
       setQuestionsLoading(false);

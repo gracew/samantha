@@ -93,8 +93,12 @@ export async function updateDate(id: string, metadata: Partial<Date>) {
     });
 }
 
-export async function getQuestions() {
-  const res = await fetch("/api/getQuestions");
+export async function getQuestions(includeArchived?: boolean) {
+  const res = await fetch("/api/getQuestions", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ includeArchived }),
+  });
   return res.json();
 }
 

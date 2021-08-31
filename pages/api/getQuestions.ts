@@ -6,10 +6,15 @@ async function handler(
     req: RequireSessionProp<NextApiRequest>,
     res: NextApiResponse
   ) {
-      const query = `SELECT * FROM questions WHERE user_id = $1 and archived = false`;
-
+    if (req.body.includeArchived) {
+      const query = `SELECT * FROM questions WHERE user_id = $1`;
       const pgRes = await client.query(query, [req.session.userId]);
       res.status(200).json(pgRes.rows);
+    } else {
+      const query = `SELECT * FROM questions WHERE user_id = $1 and archived = false`;
+      const pgRes = await client.query(query, [req.session.userId]);
+      res.status(200).json(pgRes.rows);
+    }
   }
   
   export default requireSession(handler);
