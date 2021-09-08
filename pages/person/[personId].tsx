@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { Button, Card, CardBody, CardHeader } from 'grommet';
 import { Add, Archive, Bar, Brush, Cafeteria, Clock, Grow, Java, New, Phone, Video } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
