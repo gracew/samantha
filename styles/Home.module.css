@@ -31,6 +31,12 @@
   color: white;
 }
 
+.buttonMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .grid {
   margin: 30px 0;
   display: grid;
@@ -79,4 +85,10 @@
   width: 17px !important;
   height: 17px !important;
   margin-right: 6px;
+}
+
+.archiveLabel {
+  padding: 4px 22px;
+  border-radius: 18px;
+  background-color: #26A69A;
 }
