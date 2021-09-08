@@ -1,9 +1,11 @@
-import styles from '../../styles/Form.module.css';
-import { Grid, Button } from 'grommet';
+import { Button } from 'grommet';
 import { Calendar } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
-import PrevButton from '../../components/prevButton';
+import React from 'react';
 import { emotionDict } from '.';
+import PrevButton from '../../components/prevButton';
+import { RoundButton } from '../../components/roundButton';
+import styles from '../../styles/Form.module.css';
 
 export default function NewCheckins() {
   const router = useRouter();
@@ -12,8 +14,7 @@ export default function NewCheckins() {
       <main className={styles.main}>
         <div className={styles.buttonMenu}>
           <PrevButton href="/" />
-          <Button
-            className={styles.calendarButton}
+          <RoundButton
             onClick={() => router.push(`/checkins`)}
             label={<Calendar />}
             primary

@@ -1,10 +1,11 @@
 import { Button, Card, CardBody, CardHeader } from 'grommet';
-import { Add, Bar, Brush, Cafeteria, Clock, Grow, Java, New, Phone, Video } from 'grommet-icons';
+import { Add, Archive, Bar, Brush, Cafeteria, Clock, Grow, Java, New, Phone, Video } from 'grommet-icons';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import * as uuid from "uuid";
 import CenteredSpinner from '../../components/centeredSpinner';
 import PrevButton from '../../components/prevButton';
+import { RoundButton } from '../../components/roundButton';
 import { formatDate, lowerCaseFirstLetter } from '../../components/util';
 import { getPerson, Person as IPerson } from '../../store';
 import styles from '../../styles/Home.module.css';
@@ -69,10 +70,18 @@ export default function Person() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <PrevButton href="/" />
-
         {!person && <CenteredSpinner />}
+
         {person && <div>
+          <div className={styles.buttonMenu}>
+            <PrevButton href="/" />
+            {!person.archived && <RoundButton
+              onClick={() => router.push(`/person/${personId}/archive?name=${person.name}`)}
+              children={({ hover }: { hover: boolean }) => hover ? <Archive color="#cb444a" /> : <Archive />}
+              primary />}
+            {person.archived && <Button disabled={false} label="Archived" primary />}
+          </div>
+
           <h2>
             My Dates with {person.name}
           </h2>

@@ -31,6 +31,12 @@
   color: white;
 }
 
+.buttonMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .grid {
   margin: 30px 0;
   display: grid;

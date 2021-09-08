@@ -6,6 +6,7 @@ export interface Person {
   context?: string;
   context_other?: string;
   dates: Date[];
+  archived: boolean;
 }
 
 export interface Date {
@@ -75,6 +76,14 @@ export async function addPerson(person: Partial<Person>) {
       headers: { 'content-type': 'application/json'},
       body: JSON.stringify(person),
     });
+}
+
+export async function archivePerson(id: string, reason: string, reason_other?: string) {
+  await fetch("/api/archivePerson", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id, reason, reason_other }),
+  });
 }
 
 export async function addDate(date: Partial<Date>) {
