@@ -40,7 +40,7 @@ export default function Home() {
             <div>
               <Button
                 primary
-                label={showArchived ? <div className={styles.inlineIcon}><Checkmark size="18px" />Show Archived</div> : <div>Show Archived</div>}
+                label={showArchived ? <div className={styles.inlineIcon}><Checkmark size="18px" />Archived</div> : <div>Archived</div>}
                 onClick={() => setShowArchived(!showArchived)}
               />
             </div>
