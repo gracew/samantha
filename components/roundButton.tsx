@@ -1,4 +1,4 @@
-import { Button, ButtonExtendedProps, Spinner } from 'grommet';
+import { Button, ButtonExtendedProps } from 'grommet';
 import React, { FunctionComponent } from 'react';
 import styles from '../styles/RoundButton.module.css';
 

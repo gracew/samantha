@@ -86,3 +86,9 @@
   height: 17px !important;
   margin-right: 6px;
 }
+
+.archiveLabel {
+  padding: 4px 22px;
+  border-radius: 18px;
+  background-color: #26A69A;
+}

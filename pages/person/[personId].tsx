@@ -79,7 +79,7 @@ export default function Person() {
               onClick={() => router.push(`/person/${personId}/archive?name=${person.name}`)}
               children={({ hover }: { hover: boolean }) => hover ? <Archive color="#cb444a" /> : <Archive />}
               primary />}
-            {person.archived && <Button disabled={false} label="Archived" primary />}
+            {person.archived && <div className={styles.archiveLabel}>Archived</div>}
           </div>
 
           <h2>
