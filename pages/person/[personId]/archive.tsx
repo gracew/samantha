@@ -1,15 +1,16 @@
 import { RadioButtonGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
-import styles from '../../../styles/Form.module.css';
 import { Step } from '../../../components/step';
 import { archivePerson } from '../../../store';
+import styles from '../../../styles/Form.module.css';
 
 export enum ArchiveReason {
   TryingProduct = "I was just trying out the product",
   NoPhysicalAttraction = "I'm not physically attracted to them",
   NoEmotionalAttraction = "I'm not emotionally attracted to them",
   EmotionallyUnavailable = "They're emotionally unavailable",
+  NotCompatible = "We're not compatible",
   Friends = "We're better off as friends",
   NotInterested = "They're not interested anymore",
   NoResponse = "They stopped responding",
@@ -35,7 +36,9 @@ export default function ArchivePerson() {
         <Step
           label="Archive"
           onNext={onNext}
-          nextDisabled={reason === "" || (reason === ArchiveReason.Other && other === "")}
+          nextDisabled={reason === "" ||
+            (reason === ArchiveReason.NotCompatible && other === "") ||
+            (reason === ArchiveReason.Other && other === "")}
           backHref={`/person/${personId}`}
           loading={loading}
         >
@@ -49,11 +52,11 @@ export default function ArchivePerson() {
             value={reason}
             onChange={e => setReason(e.target.value)}
           />
-          {reason === ArchiveReason.Other && <TextInput
-            style={{ marginTop: "10px" }}
-            value={other}
-            onChange={e => setOther(e.target.value)}
-          />}
+          {(reason === ArchiveReason.NotCompatible || reason === ArchiveReason.Other) &&
+            <div style={{ marginTop: "15px" }}>
+              <div style={{ color: "white" }}>Add a note:</div>
+              <TextInput value={other} onChange={e => setOther(e.target.value)} />
+            </div>}
         </Step>
       </main>
 
