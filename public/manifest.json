@@ -1,6 +1,6 @@
 {
   "short_name": "Samantha",
-  "name": "Samantha Dating Journal",
+  "name": "Samantha | Dating Journal",
   "icons": [
     {
       "src": "favicon.ico",
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#197369",
   "background_color": "#00897B"
 }

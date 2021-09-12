@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Head>
       <title>Samantha | Dating Journal</title>
       <meta name="description" content="The only app that guides you to reflect on dates and gives you custom dating tips." />
+      <meta name="theme-color" content="#197369"/>
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/webclip.png" />
       <link rel="manifest" href="/manifest.json" />
