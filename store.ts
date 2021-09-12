@@ -3,6 +3,7 @@ export interface Goal {
   goal_other?: string;
   importance: string;
 }
+
 export interface Person {
   id: string;
   name: string;
