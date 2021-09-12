@@ -27,6 +27,7 @@
   color: white
 }
 
+.checkBoxGroup label,
 .radioButtonGroup label {
   background: white;
   width: 100%;
@@ -35,8 +36,10 @@
   border-radius: 12px;
 }
 
-.radioButtonGroup label div {
-  margin-right: 5px;
+.checkBoxGroup label span,
+.radioButtonGroup label span {
+  position: relative;
+  top: 2px;
 }
 
 .descriptionText {
