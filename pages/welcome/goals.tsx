@@ -16,22 +16,17 @@ enum Goal {
 
 export default function Goals() {
   const router = useRouter();
-  const [goals, setGoals] = useState<string[]>([]);
-  const [other, setOther] = useState("");
+  const [goals, setGoals] = useState<string[]>(router.query.goals ? JSON.parse(router.query.goals as string) : []);
+  const [other, setOther] = useState(router.query.other as string || "");
 
   function onChange(e: any) {
     const value = e.option.label;
-    if (value === Goal.Other) {
-      if (goals.includes(value)) {
-        setGoals([]);
-      } else {
-        setGoals([Goal.Other]);
-      }
-      return;
-    }
-
     if (goals.includes(value)) {
+      // deselection
       setGoals(goals.filter(g => g !== value));
+      if (value === Goal.Other) {
+        setOther("");
+      }
     } else {
       setGoals([...goals, value]);
     }
@@ -42,7 +37,7 @@ export default function Goals() {
       <main className={styles.main}>
         <Step
           label="Next"
-          onNext={() => router.push("/welcome/importance")}
+          onNext={() => router.push(`/welcome/importance?goals=${JSON.stringify(goals)}&other=${other}`)}
           backHref="/welcome"
           nextDisabled={goals.length === 0 || (goals[0] === Goal.Other && other === "")}
         >

@@ -158,3 +158,11 @@
   color: white;
   margin: 20px 0;
 }
+
+.nextButton {
+  margin: 40px 0 !important;
+  padding: 8px !important;
+  width: 100%;
+  font-weight: bold !important;
+  color: white !important;
+}
