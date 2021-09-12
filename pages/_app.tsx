@@ -8,7 +8,7 @@ import { Grommet } from 'grommet';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import DesktopMenu from "../components/desktopMenu";
 import MobileMenu from "../components/mobileMenu";
 import '../styles/globals.css';
@@ -23,6 +23,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
     }
   };
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/serviceWorker.js");
+    }
+  }, [])
 
   return <ClerkProvider
     frontendApi={clerkFrontendApi}
