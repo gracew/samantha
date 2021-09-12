@@ -1,14 +1,13 @@
 import { useRouter } from 'next/dist/client/router';
-import React, { useRef } from 'react';
+import React from 'react';
 import { Step } from '../../components/step';
 import styles from '../../styles/Form.module.css';
 
 export default function Welcome() {
-  const ref = useRef();
   const router = useRouter();
 
   return (
-    <div className={styles.container} ref={ref as any}>
+    <div className={styles.container}>
       <main className={styles.main}>
         <Step label="Let's go!" onNext={() => router.push("/welcome/goals")}>
           <h2>👋</h2>
@@ -26,6 +25,10 @@ export default function Welcome() {
           <p>
             Like a good friend you trust, everything here is confidential and will never be shared. It’s just here for you
             as one more helpful tool in your kit.
+          </p>
+          <p>
+            So let’s begin with a few quick questions to learn about what you're looking for and where you are currently
+            in your dating journey.
           </p>
         </Step>
       </main>

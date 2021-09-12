@@ -1,6 +1,6 @@
 import { CheckBoxGroup, TextInput } from 'grommet';
 import { useRouter } from 'next/dist/client/router';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Step } from '../../components/step';
 import styles from '../../styles/Form.module.css';
 
@@ -15,7 +15,6 @@ enum Goal {
 }
 
 export default function Goals() {
-  const ref = useRef();
   const router = useRouter();
   const [goals, setGoals] = useState<string[]>([]);
   const [other, setOther] = useState("");
@@ -39,9 +38,14 @@ export default function Goals() {
   }
 
   return (
-    <div className={styles.container} ref={ref as any}>
+    <div className={styles.container}>
       <main className={styles.main}>
-        <Step label="Let's go!" onNext={() => router.push("/welcome/goals")}>
+        <Step
+          label="Next"
+          onNext={() => router.push("/welcome/importance")}
+          backHref="/welcome"
+          nextDisabled={goals.length === 0 || (goals[0] === Goal.Other && other === "")}
+        >
           <h2>What are your current dating goals?</h2>
           <p className={styles.descriptionText}>
             Feel free to select multiple!
