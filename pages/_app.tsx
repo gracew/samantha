@@ -7,11 +7,18 @@ import {
 import { Grommet } from 'grommet';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/dist/client/router';
+import dynamic from "next/dynamic";
 import Head from 'next/head';
 import React, { useEffect } from 'react';
 import DesktopMenu from "../components/desktopMenu";
 import MobileMenu from "../components/mobileMenu";
 import '../styles/globals.css';
+
+// https://github.com/chrisdancee/react-ios-pwa-prompt/issues/32#issuecomment-586762839
+const PWAPrompt = dynamic(() => import("react-ios-pwa-prompt"), {
+  ssr: false
+});
+
 const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -48,6 +55,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <DesktopMenu />
         <Component {...pageProps} />
         <MobileMenu />
+        {/* @ts-ignore */}
+        <PWAPrompt copyBody="Add Samantha to your home screen for easy access. Using Safari:" />
       </Grommet>
     </SignedIn>
     <SignedOut>
