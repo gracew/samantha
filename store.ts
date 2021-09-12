@@ -1,4 +1,8 @@
-
+export interface Goal {
+  goals: string[];
+  goal_other?: string;
+  importance: string;
+}
 
 export interface Person {
   id: string;
@@ -33,6 +37,22 @@ export interface Question {
   type: string;
 }
 
+export async function addGoals(goal: Goal) {
+    await fetch("/api/addGoals", {
+      method: 'post',
+      headers: { 'content-type': 'application/json'},
+      body: JSON.stringify(goal),
+    });
+}
+
+export async function addPerson(person: Partial<Person>) {
+    await fetch("/api/addPerson", {
+      method: 'post',
+      headers: { 'content-type': 'application/json'},
+      body: JSON.stringify(person),
+    });
+}
+
 export async function getPersons() {
   const res = await fetch("/api/getPersons");
   return res.json();
@@ -45,37 +65,6 @@ export async function getPerson(id: string) {
     body: JSON.stringify({ id }),
   });
   return res.json();
-}
-
-export async function getDate(id: string) {
-  const res = await fetch("/api/getDate", {
-    method: 'post',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ id }),
-  });
-  return res.json();
-}
-
-export async function getCheckin(id: string) {
-  const res = await fetch("/api/getCheckin", {
-    method: 'post',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ id }),
-  });
-  return res.json();
-}
-
-export async function getCheckins() {
-  const res = await fetch("/api/getCheckins");
-  return res.json();
-}
-
-export async function addPerson(person: Partial<Person>) {
-    await fetch("/api/addPerson", {
-      method: 'post',
-      headers: { 'content-type': 'application/json'},
-      body: JSON.stringify(person),
-    });
 }
 
 export async function archivePerson(id: string, reason: string, reason_other?: string) {
@@ -102,12 +91,26 @@ export async function updateDate(id: string, metadata: Partial<Date>) {
     });
 }
 
-export async function getQuestions(includeArchived?: boolean) {
-  const res = await fetch("/api/getQuestions", {
-      method: 'post',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ includeArchived }),
+export async function getDate(id: string) {
+  const res = await fetch("/api/getDate", {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ id }),
   });
+  return res.json();
+}
+
+export async function getCheckin(id: string) {
+  const res = await fetch("/api/getCheckin", {
+    method: 'post',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  return res.json();
+}
+
+export async function getCheckins() {
+  const res = await fetch("/api/getCheckins");
   return res.json();
 }
 
@@ -117,6 +120,15 @@ export async function addQuestion(question: string, type: string) {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ question, type }),
   });
+}
+
+export async function getQuestions(includeArchived?: boolean) {
+  const res = await fetch("/api/getQuestions", {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ includeArchived }),
+  });
+  return res.json();
 }
 
 export async function archiveQuestion(id: string) {

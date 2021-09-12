@@ -21,8 +21,7 @@ export default function NewCheckins() {
             color="white"
           />
         </div>
-        <h2>Check-Ins</h2>
-        <div className={styles.descriptionText}>How are you feeling about dating today?</div>
+        <h2>How are you currently feeling about dating?</h2>
         <div className={styles.emotionGrid}>
           {Object.entries(emotionDict).map(([text, emoji]) =>
             <Button

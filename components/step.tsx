@@ -9,7 +9,7 @@ interface StepProps {
   onNext: () => void;
   onBack?: () => void;
   backHref?: string;
-  nextDisabled: boolean;
+  nextDisabled?: boolean;
   loading?: boolean;
   progress?: number;
 }
