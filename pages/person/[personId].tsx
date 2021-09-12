@@ -103,9 +103,9 @@ export default function Person() {
               </Button>
             </Card>)}
 
-            <Card className={styles.card} background="light-1">
+            {!person.archived && <Card className={styles.card} background="light-1">
               <Button className={styles.addButton} hoverIndicator icon={<Add />} onClick={onAddDate} />
-            </Card>
+            </Card>}
           </div>
         </div>}
       </main>
